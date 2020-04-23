@@ -1,16 +1,91 @@
 #VRML_SIM R2020a utf8
 WorldInfo {
-  info [
-  ]
 }
 Viewpoint {
-  orientation -0.7 0.7 0.2 0.75
-  position 1.2 1.6 2.3
-
+  orientation 0.09233486612574794 -0.9942299951023258 -0.054598437123871295 3.550616908554548
+  position 0.44724366476706606 0.26370424514325347 -1.1772715397447198
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
+  floorSize 5 5
+  wallHeight 0.5
+}
+DEF Robot Robot {
+  translation -0.240377 0.233568 -0.282983
+  rotation 0.06977509681107232 0.9970929544299116 -0.0306116986009551 0.950442
+  children [
+    Shape {
+      appearance MattePaint {
+        baseColor 1 0 0
+      }
+      geometry Box {
+        size 0.2 0.05 0.1
+      }
+    }
+    DEF Leg_FrontRight HingeJoint {
+      jointParameters HingeJointParameters {
+        position -4.783640424759537e-07
+      }
+      device [
+        RotationalMotor {
+          muscles [
+            Muscle {
+              volume 0.0001
+            }
+          ]
+        }
+      ]
+      endPoint DEF UpperLimb_Solid Solid {
+        translation 0.07499999999999997 -0.024999954493502792 0.07200001580085094
+        rotation -3.162690602908169e-07 0.9999999999999001 -3.160173069893591e-07 1.570000000000108
+        children [
+          HingeJoint {
+            jointParameters HingeJointParameters {
+            }
+            device [
+              RotationalMotor {
+              }
+            ]
+            endPoint Solid {
+              translation 0 -0.075 0
+              children [
+                DEF LowerLimb Shape {
+                  appearance MattePaint {
+                    baseColor 0.25 0 0
+                  }
+                  geometry Cylinder {
+                    height 0.075
+                    radius 0.02
+                  }
+                }
+              ]
+              physics Physics {
+              }
+            }
+          }
+          Shape {
+            appearance MattePaint {
+              baseColor 0.5 0 0
+            }
+            geometry DEF UpperLimb Cylinder {
+              height 0.075
+              radius 0.02
+            }
+          }
+        ]
+        name "upperLimb"
+        boundingObject USE UpperLimb
+        physics DEF Physics_UpLimb Physics {
+        }
+      }
+    }
+  ]
+  boundingObject DEF Body Box {
+    size 0.2 0.05 0.1
+  }
+  physics Physics {
+  }
 }

@@ -1,0 +1,366 @@
+#VRML_OBJ R2020a utf8
+Robot {
+  translation -0.037159465646615625 0.04055468692925624 0.060778136282475276
+  rotation 4.700666902538167e-06 0.9999999237206669 -0.00039055929593922935 -0.06716073719414836
+  children [
+    HingeJoint {
+      jointParameters DEF HIP HingeJointParameters {
+        position -3.8024943174405813e-07
+      }
+      device [
+        RotationalMotor {
+        }
+      ]
+      endPoint DEF FEMUR_0 Solid {
+        translation 0.07999979999999994 7.796778746216386e-07 -0.08999999999965565
+        rotation 3.096369762264573e-13 0.9999999999979016 2.0486381923394165e-06 3.14159
+        children [
+          HingeJoint {
+            jointParameters DEF KNEE HingeJointParameters {
+              position -3.7951677468193304e-07
+            }
+            device [
+              RotationalMotor {
+              }
+            ]
+            endPoint DEF TIBIA_0 Solid {
+              translation 1.5503791985978542e-05 -0.04069395911105925 0.05822393750543752
+              rotation 1 -7.920019678427408e-09 -3.1231324481915442e-09 1.5707997125830435
+              children [
+                DEF TIBIA Shape {
+                  appearance MattePaint {
+                    baseColor 0.2 0.2 0.2
+                  }
+                  geometry Box {
+                    size 0.03 0.03 0.1
+                  }
+                }
+              ]
+              boundingObject USE TIBIA
+              physics DEF TIBIA_phys Physics {
+              }
+              linearVelocity 1.9797807050677882e-07 9.441968537884818e-06 8.71457657784047e-08
+              angularVelocity 2.406866452903446e-06 -7.094904422526501e-08 -3.6775746033539188e-06
+            }
+          }
+          DEF FEMUR Shape {
+            appearance MattePaint {
+              baseColor 0.6 0 0
+            }
+            geometry Box {
+              size 0.03 0.03 0.1
+            }
+          }
+        ]
+        name "solid(5)"
+        boundingObject USE FEMUR
+        physics DEF FEMUR_PHYS Physics {
+        }
+        linearVelocity 3.47686981528721e-07 9.319348252434806e-06 1.0893298312120039e-07
+        angularVelocity 2.425478432495856e-06 -7.103651160972731e-08 -3.676422530794506e-06
+      }
+    }
+    HingeJoint {
+      jointParameters DEF HIP HingeJointParameters {
+        position -7.32097926649585e-07
+      }
+      device [
+        RotationalMotor {
+        }
+      ]
+      endPoint DEF FEMUR_0 Solid {
+        translation -0.07000020000000003 7.480115100802158e-07 -0.08999999999992447
+        rotation 7.622158250407357e-14 0.9999999999982466 1.8727139448869926e-06 3.14159
+        children [
+          HingeJoint {
+            jointParameters DEF KNEE HingeJointParameters {
+              position -3.8053512444822187e-07
+            }
+            device [
+              RotationalMotor {
+              }
+            ]
+            endPoint DEF TIBIA_0 Solid {
+              translation 1.54934594061712e-05 -0.04069015124170701 0.05822392129774548
+              rotation 1 -8.591229648545102e-09 -3.193422739441336e-09 1.5707997122754545
+              children [
+                DEF TIBIA Shape {
+                  appearance MattePaint {
+                    baseColor 0.2 0.2 0.2
+                  }
+                  geometry Box {
+                    size 0.03 0.03 0.1
+                  }
+                }
+              ]
+              boundingObject USE TIBIA
+              physics DEF TIBIA_phys Physics {
+                centerOfMass [
+                  0 0 0
+                ]
+              }
+              linearVelocity 1.8784617238777678e-07 9.50847941236719e-06 -6.044591406441669e-08
+              angularVelocity -1.0805862127878061e-06 -6.738927723691749e-08 -3.913898425544033e-06
+            }
+          }
+          DEF FEMUR Shape {
+            appearance MattePaint {
+              baseColor 0.6 0 0
+            }
+            geometry Box {
+              size 0.03 0.03 0.1
+            }
+          }
+        ]
+        name "solid(4)"
+        boundingObject USE FEMUR
+        physics DEF FEMUR_PHYS Physics {
+        }
+        linearVelocity 3.4774493175692586e-07 9.58324372504666e-06 -4.1030102649310976e-08
+        angularVelocity -1.0878949480584305e-06 -6.803727587005505e-08 -3.9136044378930565e-06
+      }
+    }
+    HingeJoint {
+      jointParameters DEF HIP HingeJointParameters {
+        position -5.603017219561608e-07
+      }
+      device [
+        RotationalMotor {
+        }
+      ]
+      endPoint DEF FEMUR_0 Solid {
+        translation -1.8575199999999988e-07 7.634731685025982e-07 -0.08999999999979452
+        rotation 1.901907463320606e-13 0.9999999999980821 1.958612047233547e-06 3.14159
+        children [
+          HingeJoint {
+            jointParameters DEF KNEE HingeJointParameters {
+              position -3.833073403297436e-07
+            }
+            device [
+              RotationalMotor {
+              }
+            ]
+            endPoint DEF TIBIA_0 Solid {
+              translation 1.5503791985978546e-05 -0.0406939588903576 0.058223937659690625
+              rotation 1 -7.920019699357251e-09 -3.123132439100067e-09 1.570799708792478
+              children [
+                DEF TIBIA Shape {
+                  appearance MattePaint {
+                    baseColor 0.2 0.2 0.2
+                  }
+                  geometry Box {
+                    size 0.03 0.03 0.1
+                  }
+                }
+              ]
+              boundingObject USE TIBIA
+              physics DEF TIBIA_phys Physics {
+              }
+              linearVelocity 1.9200929726511057e-07 9.47828778148528e-06 8.366960058379104e-09
+              angularVelocity 5.538227969134896e-07 -6.389441159999666e-08 -3.8029010547364124e-06
+            }
+          }
+          DEF FEMUR Shape {
+            appearance MattePaint {
+              baseColor 0.6 0 0
+            }
+            geometry Box {
+              size 0.03 0.03 0.1
+            }
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE FEMUR
+        physics DEF FEMUR_PHYS Physics {
+        }
+        linearVelocity 3.473462318253663e-07 9.460403118459347e-06 2.8997803289694413e-08
+        angularVelocity 5.540159461229348e-07 -6.426524331543447e-08 -3.8025246426447223e-06
+      }
+    }
+    HingeJoint {
+      jointParameters DEF HIP HingeJointParameters {
+        position -1.1090836438336873e-06
+      }
+      device [
+        RotationalMotor {
+        }
+      ]
+      endPoint DEF FEMUR_0 Solid {
+        translation -0.0799999999999994 2.4648871207088223e-06 0.09000079999955167
+        rotation 0.9997667903328523 0.0076475702368580594 -0.020196029734056323 3.3510057833837454e-06
+        children [
+          HingeJoint {
+            jointParameters DEF KNEE HingeJointParameters {
+              position -3.8404301895164213e-07
+            }
+            device [
+              RotationalMotor {
+              }
+            ]
+            endPoint DEF TIBIA_0 Solid {
+              translation 1.5503791985978522e-05 -0.040693958847523456 0.058223937689628275
+              rotation 1 -7.920019703419368e-09 -3.123132437335583e-09 1.5707997080567975
+              children [
+                DEF TIBIA Shape {
+                  appearance MattePaint {
+                    baseColor 0.2 0.2 0.2
+                  }
+                  geometry Box {
+                    size 0.03 0.03 0.1
+                  }
+                }
+              ]
+              boundingObject USE TIBIA
+              physics DEF TIBIA_phys Physics {
+              }
+              linearVelocity 1.7642305359909775e-07 9.691307001381157e-06 4.243855152758672e-08
+              angularVelocity 5.306854276130199e-07 -6.334611989380933e-08 -3.8036628571502653e-06
+            }
+          }
+          DEF FEMUR Shape {
+            appearance MattePaint {
+              baseColor 0.6 0 0
+            }
+            geometry Box {
+              size 0.03 0.03 0.1
+            }
+          }
+        ]
+        name "solid(2)"
+        boundingObject USE FEMUR
+        physics DEF FEMUR_PHYS Physics {
+        }
+        linearVelocity 3.377094719765417e-07 9.710783255856783e-06 4.289583510665715e-08
+        angularVelocity 5.376357890737434e-07 -6.338475389465205e-08 -3.803085756341857e-06
+      }
+    }
+    HingeJoint {
+      jointParameters DEF HIP HingeJointParameters {
+        position -1.260717302739719e-06
+      }
+      device [
+        RotationalMotor {
+        }
+      ]
+      endPoint DEF FEMUR_0 Solid {
+        translation 0.08000000000000017 5.648814941335573e-06 0.09000189999834708
+        rotation 0.9977546182326011 -0.02106536100202823 0.06357650793627038 3.239692020177022e-06
+        children [
+          HingeJoint {
+            jointParameters DEF KNEE HingeJointParameters {
+              position -3.7380447205066045e-07
+            }
+            device [
+              RotationalMotor {
+              }
+            ]
+            endPoint DEF TIBIA_0 Solid {
+              translation 1.55037919859785e-05 -0.04069395944365197 0.05822393727298122
+              rotation 1 -7.920019646886583e-09 -3.123132461892212e-09 1.5707997182953448
+              children [
+                DEF TIBIA Shape {
+                  appearance MattePaint {
+                    baseColor 0.2 0.2 0.2
+                  }
+                  geometry Box {
+                    size 0.03 0.03 0.1
+                  }
+                }
+              ]
+              boundingObject USE TIBIA
+              physics DEF TIBIA_phys Physics {
+              }
+              linearVelocity 2.0422395166221176e-07 9.341116939563085e-06 -2.9774100998597414e-08
+              angularVelocity -1.1694605379217653e-06 -5.843937889196841e-08 -3.916249598985409e-06
+            }
+          }
+          DEF FEMUR Shape {
+            appearance MattePaint {
+              baseColor 0.6 0 0
+            }
+            geometry Box {
+              size 0.03 0.03 0.1
+            }
+          }
+        ]
+        name "solid(1)"
+        boundingObject USE FEMUR
+        physics DEF FEMUR_PHYS Physics {
+        }
+        linearVelocity 3.536231588438092e-07 9.257328596407035e-06 -2.2914734444877048e-08
+        angularVelocity -1.1840051254269477e-06 -5.91171427661562e-08 -3.918125424945264e-06
+      }
+    }
+    HingeJoint {
+      jointParameters DEF HIP HingeJointParameters {
+        position -7.853783026129064e-07
+      }
+      device [
+        RotationalMotor {
+        }
+      ]
+      endPoint DEF FEMUR_0 Solid {
+        translation 0 7.86301392447666e-08 0.08999999999996532
+        rotation 1 0 0 3.6917608062146024e-06
+        children [
+          HingeJoint {
+            jointParameters DEF KNEE HingeJointParameters {
+              position -1.4010926435756763e-07
+            }
+            device [
+              RotationalMotor {
+              }
+            ]
+            endPoint DEF TIBIA_0 Solid {
+              translation 1.5503791985978556e-05 -0.04069397305030605 0.05822392776299645
+              rotation 1 -7.920018356523994e-09 -3.1231330223981566e-09 1.5707999519905542
+              children [
+                DEF TIBIA Shape {
+                  appearance MattePaint {
+                    baseColor 0.2 0.2 0.2
+                  }
+                  geometry Box {
+                    size 0.03 0.03 0.1
+                  }
+                }
+              ]
+              boundingObject USE TIBIA
+              physics DEF TIBIA_phys Physics {
+              }
+              linearVelocity 1.8726344710402823e-07 9.396691005096607e-06 4.1854093521862913e-08
+              angularVelocity 5.504700979800275e-07 -6.394052232749455e-08 -3.8016294067460805e-06
+            }
+          }
+          DEF FEMUR Shape {
+            appearance MattePaint {
+              baseColor 0.6 0 0
+            }
+            geometry Box {
+              size 0.03 0.03 0.1
+            }
+          }
+        ]
+        boundingObject USE FEMUR
+        physics DEF FEMUR_PHYS Physics {
+        }
+        linearVelocity 3.4288786996851486e-07 9.410181086669548e-06 4.553360040830775e-08
+        angularVelocity 5.522019697182599e-07 -6.429806755158651e-08 -3.8018980795568906e-06
+      }
+    }
+    Shape {
+      appearance MattePaint {
+        baseColor 0.5 0 0
+      }
+      geometry DEF BODY Box {
+        size 0.2 0.045 0.1
+      }
+    }
+  ]
+  name "hexabot"
+  model "hexabot"
+  boundingObject USE BODY
+  physics Physics {
+  }
+  linearVelocity 3.4588641641024644e-07 9.433217739915273e-06 2.6953865092150783e-08
+  angularVelocity 5.54218811916608e-07 -6.501642175172772e-08 -3.8021476098361145e-06
+}
