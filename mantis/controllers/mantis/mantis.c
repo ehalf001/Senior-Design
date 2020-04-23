@@ -251,10 +251,28 @@ void StrafeLeft()
 int main(int argc, char **argv) {
   wb_robot_init();
   int time_step = (int)wb_robot_get_basic_time_step();
+  wb_keyboard_enable(time_step);
+  int key;
   while (wb_robot_step(time_step) != -1) {
-      StrafeLeft();
+      key = wb_keyboard_get_key();
+      if(key == WB_KEYBOARD_UP)
+      {
+        WalkForward();
+      }
+      else if(key == WB_KEYBOARD_DOWN)
+      {
+        WalkBackward();
+      }
+      else if(key == WB_KEYBOARD_LEFT)
+      {
+        TurnLeft();
+      }
+      else if(key == WB_KEYBOARD_RIGHT)
+      {
+        TurnRight();
+      }
   };
-
+  wb_keyboard_disable();
   wb_robot_cleanup();
 
   return EXIT_SUCCESS;
