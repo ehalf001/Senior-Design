@@ -8,6 +8,6 @@ projectionMode: ORTHOGRAPHIC
 renderingMode: PLAIN
 selectionDisabled: 0
 viewpointLocked: 0
-orthographicViewHeight: 0.721467
+orthographicViewHeight: 0.571797
 textFiles: 3 "controllers/camera.py" "controllers/test.py" "controllers/my_controller/my_controller.py" "controllers/my_controller_c/my_controller_c.c"
 renderingDevicePerspectives: Hexabot:Hexabot_Camera;1;3.15625;0;0

@@ -15,6 +15,7 @@
 #include <webots/motor.h>
 #include <webots/Keyboard.h>
 #include <webots/gps.h>
+#include <webots/gyro.h>
 
 #include <string.h>
 #include <math.h>
@@ -53,6 +54,10 @@ int main(int argc, char **argv) {
    double pos_z = pos[2];
    
    double vel = wb_gps_get_speed(Hexabot_GPS);
+   
+   //Gyro enable
+   WbDeviceTag Hexabot_Gyro = wb_robot_get_device("Hexabot_Gyro");
+   wb_gyro_enable(Hexabot_Gyro,10);
    
    //Robot Walking Motors
    WbDeviceTag Hexabot_Motors[18] = {wb_robot_get_device("Hexabot_Leg0_Motor1"), wb_robot_get_device("Hexabot_Leg0_Motor2"), wb_robot_get_device("Hexabot_Leg0_Motor3"),
