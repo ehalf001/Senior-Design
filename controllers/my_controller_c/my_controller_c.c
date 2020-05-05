@@ -99,20 +99,14 @@ int main(int argc, char **argv) {
       }
       
       //printf("hello\n");
+      //GPS print values
+      if(key == 'P')
+      {
       x = pos[0];
       y = pos[1];
       z = pos[2];
       printf("Postion: x[%g] y[%g] z[%g]\n", x,y,z);
-      //GPS print values
-      /*
-      if(key == 'P')
-      {
-        //wb_gps_enable(Hexabot_GPS,0);
-        //wb_gps_get_values(Hexabot_GPS);
-        
-        printf("Position: %", wb_gps_get_values(Hexabot_GPS));
       }
-      */
  
    };
 
