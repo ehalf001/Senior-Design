@@ -59,6 +59,11 @@ int main(int argc, char **argv) {
    WbDeviceTag Hexabot_Gyro = wb_robot_get_device("Hexabot_Gyro");
    wb_gyro_enable(Hexabot_Gyro,10);
    
+   const double *gyro = wb_gyro_get_values(Hexabot_Gyro);
+   double gyro_x = gyro[0];
+   double gyro_y = gyro[1];
+   double gyro_z = gyro[2];
+   
    //Robot Walking Motors
    WbDeviceTag Hexabot_Motors[18] = {wb_robot_get_device("Hexabot_Leg0_Motor1"), wb_robot_get_device("Hexabot_Leg0_Motor2"), wb_robot_get_device("Hexabot_Leg0_Motor3"),
                                     wb_robot_get_device("Hexabot_Leg1_Motor1"), wb_robot_get_device("Hexabot_Leg1_Motor2"), wb_robot_get_device("Hexabot_Leg1_Motor3"),
@@ -109,13 +114,21 @@ int main(int argc, char **argv) {
       
       //printf("hello\n");
       //GPS print values
+      
       pos_x = pos[0];
       pos_y = pos[1];
       pos_z = pos[2];
+      
       vel = wb_gps_get_speed(Hexabot_GPS);
+      
+      gyro_x = gyro[0];
+      gyro_y = gyro[1];
+      gyro_z = gyro[2];
+   
       if (vel >= 0.01) {
         printf("Postion: x[%g] y[%g] z[%g]\n", pos_x,pos_y,pos_z);
         printf("Velocity: %g\n", vel);
+        printf("Rotational Pos: x[%g] y[%g] z[%g]\n", gyro_x,gyro_y,gyro_z);
       }
       /*
       if(key == 'P')
