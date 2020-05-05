@@ -14,6 +14,7 @@
 #include <webots/camera.h>
 #include <webots/motor.h>
 #include <webots/Keyboard.h>
+#include <webots/gps.h>
 
 #include <string.h>
 #include <math.h>
@@ -39,9 +40,18 @@ int main(int argc, char **argv) {
   /* necessary to initialize webots stuff */
   wb_robot_init();
 
-
+  //Camera Enable
    WbDeviceTag Hexabot_Camera = wb_robot_get_device("Hexabot_Camera");
    wb_camera_enable(Hexabot_Camera, 10);
+   
+   //GPS enable
+   WbDeviceTag Hexabot_GPS = wb_robot_get_device("Hexabot_GPS");
+   wb_gps_enable(Hexabot_GPS,10);
+   const double *pos = wb_gps_get_values(Hexabot_GPS);
+   double x = pos[0];
+   double y = pos[1];
+   double z = pos[2];
+   
    //Robot Walking Motors
    WbDeviceTag Hexabot_Motors[18] = {wb_robot_get_device("Hexabot_Leg0_Motor1"), wb_robot_get_device("Hexabot_Leg0_Motor2"), wb_robot_get_device("Hexabot_Leg0_Motor3"),
                                     wb_robot_get_device("Hexabot_Leg1_Motor1"), wb_robot_get_device("Hexabot_Leg1_Motor2"), wb_robot_get_device("Hexabot_Leg1_Motor3"),
@@ -87,6 +97,23 @@ int main(int argc, char **argv) {
            wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
         
       }
+      
+      //printf("hello\n");
+      x = pos[0];
+      y = pos[1];
+      z = pos[2];
+      printf("Postion: x[%g] y[%g] z[%g]\n", x,y,z);
+      //GPS print values
+      /*
+      if(key == 'P')
+      {
+        //wb_gps_enable(Hexabot_GPS,0);
+        //wb_gps_get_values(Hexabot_GPS);
+        
+        printf("Position: %", wb_gps_get_values(Hexabot_GPS));
+      }
+      */
+ 
    };
 
   /* Enter your cleanup code here */

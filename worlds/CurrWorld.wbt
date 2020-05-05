@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.47201779120249576 -0.8485288484544581 -0.23916102970356282 4.8701880309747585
-  position 1.6950811772876875 1.1160481030235734 0.48885695475420293
+  orientation 0.24443824920308785 0.9222913044622256 0.2993805137945606 4.846491545454493
+  position -0.48547344177472207 0.44999089268750725 0.6778512052756237
   follow "Hexabot"
   followType "None"
 }
@@ -17,9 +17,12 @@ RectangleArena {
   wallHeight 0.5
 }
 Robot {
-  translation 0.491957902960532 0.05894456689772514 0.4450496112783327
-  rotation 0.02192674282114141 -0.999670555426598 0.013341610185148418 1.213008331460186
+  translation 0.4154128301936342 0.05542697260889477 0.4244562447612574
+  rotation 0.1083102424502648 -0.9940971791545368 0.006299982329951215 0.7729634116971863
   children [
+    GPS {
+      name "Hexabot_GPS"
+    }
     Camera {
       translation 0.1 -1.12008e-13 -1.49482e-07
       rotation 8.684229999951365e-07 -0.9999999999943995 3.2321499999818985e-06 1.5707853071795865
@@ -55,12 +58,12 @@ Robot {
         }
       ]
     }
-    Hinge2Joint {
+    DEF Leg0 Hinge2Joint {
       jointParameters HingeJointParameters {
-        position -0.025879347828721408
+        position -0.18701815513273776
       }
       jointParameters2 JointParameters {
-        position -0.2869285444565337
+        position -0.11898397697863475
         axis 0 1 0
       }
       device [
@@ -74,8 +77,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation 0.0760159476019547 -0.010549889669052757 0.053432486916179
-        rotation 0.9936597400429561 -0.001997549050580834 -0.11241143543054463 2.04898893797737
+        translation 0.08382938331408585 -0.004341924183014121 0.04121331468674852
+        rotation 0.9771243878887881 0.03246036157983664 -0.21017672449409724 1.895778491967797
         children [
           Transform {
             children [
@@ -85,7 +88,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position -0.20367831979530981
+                      position -0.39920257702700424
                       axis 0 0 1
                     }
                     device [
@@ -94,8 +97,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -0.00011354509346781324 -0.0007266114240212971 -0.058563902416361696
-                      rotation -0.6876481484972162 -0.7120102364226322 -0.14206142015951262 2.814086046250071
+                      translation -0.00025254827000848265 -0.0006907068995490012 -0.05856390241636168
+                      rotation -0.7521230090642507 -0.64001218395789 -0.15714764911251194 2.8433618625129338
                       children [
                         Transform {
                           children [
@@ -131,8 +134,8 @@ Robot {
                       boundingObject USE ELBOW_SHAPE
                       physics Physics {
                       }
-                      linearVelocity -0.05174957088002762 -0.004877871154821493 -0.0014300816004784818
-                      angularVelocity -0.15059165578566924 -0.19947963376175104 -0.1532861081564611
+                      linearVelocity 4.000525069407271e-06 2.812948174349296e-08 -1.598994256920356e-06
+                      angularVelocity 1.6234804873247182e-06 6.45675940803244e-06 4.102836501117266e-06
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -163,16 +166,16 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
-        linearVelocity -0.038955738242228984 -0.023668123536574694 0.010365342912176195
-        angularVelocity -0.14233991469029134 -0.20554987406957756 -0.1595014487407504
+        linearVelocity 3.324229671375812e-06 2.961631289959114e-07 -1.7479689381667264e-06
+        angularVelocity 1.6228182620414793e-06 6.440394955124855e-06 4.112305008649569e-06
       }
     }
-    Hinge2Joint {
+    DEF Leg1 Hinge2Joint {
       jointParameters HingeJointParameters {
-        position 0.42587884603453563
+        position 0.5870160600638636
       }
       jointParameters2 JointParameters {
-        position -0.11307350091981405
+        position -0.2810161144134442
         axis 0 1 0
       }
       device [
@@ -186,8 +189,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation 0.004129887313119893 -0.015382474971728507 0.0576809303613263
-        rotation 0.99121450052959 0.07951729352003112 -0.10569207146765834 1.7101476252275014
+        translation -0.005770839755939113 -0.02436107582730029 0.05435072792402042
+        rotation 0.9982281099346632 -0.015598524137855781 -0.05742235262500722 1.8722850454391218
         children [
           Transform {
             children [
@@ -197,7 +200,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position -0.3963210361321165
+                      position -0.2007972263826008
                       axis 0 0 1
                     }
                     device [
@@ -206,8 +209,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -0.00023765501944008436 -0.0005803081353767045 -0.05861795080600543
-                      rotation -0.751233020520001 -0.6411395997246031 -0.15680868134568207 2.8427023861669802
+                      translation -0.00012038425850812265 -0.0006154226763395252 -0.058617950806005424
+                      rotation -0.6866496685444318 -0.7130470621701567 -0.1416902248510132 2.813496112498715
                       children [
                         Transform {
                           children [
@@ -243,8 +246,8 @@ Robot {
                       boundingObject USE ELBOW_SHAPE
                       physics Physics {
                       }
-                      linearVelocity -0.012246519445995408 -0.08351326042943963 0.034210103965253945
-                      angularVelocity -0.04441133876595327 0.09319752350668342 0.28564245693015616
+                      linearVelocity 1.8757754825786646e-05 -4.1562664206010373e-07 -1.4714366794407562e-05
+                      angularVelocity 2.8889919862590084e-06 6.654969107325727e-06 5.309972600205458e-06
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -275,16 +278,16 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
-        linearVelocity -0.017014352873008277 -0.06471729958310884 0.027416602127678873
-        angularVelocity -0.05074382987187376 0.10247297136531693 0.2897677577481804
+        linearVelocity 1.0601510007804791e-05 6.233730851822249e-08 -8.151296152750935e-06
+        angularVelocity 2.031495379881994e-06 6.555515967628159e-06 4.56682230850593e-06
       }
     }
-    Hinge2Joint {
+    DEF Leg2 Hinge2Joint {
       jointParameters HingeJointParameters {
-        position 1.1741322543261181
+        position 1.0129819000548252
       }
       jointParameters2 JointParameters {
-        position -0.2869333428999383
+        position -0.11898388493214035
         axis 0 1 0
       }
       device [
@@ -298,8 +301,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -0.08906131861563947 0.006904973679252413 0.048032150457016594
-        rotation 0.9920998052001875 -0.0858594995335793 -0.09146651224133054 2.2644190810571754
+        translation -0.08577081989043747 0.0020371111112599156 0.054091600514642
+        rotation 0.9958156347159716 -0.000658406370352852 -0.09138264691000188 2.08747115750039
         children [
           Transform {
             children [
@@ -309,7 +312,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position -0.20367907985029407
+                      position -0.3992025714894789
                       axis 0 0 1
                     }
                     device [
@@ -318,8 +321,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -0.00011607089039433459 -0.0006906769574844882 -0.058575884565078874
-                      rotation -0.6926055693801912 -0.7195459910434835 -0.050508336309882676 3.001527060987965
+                      translation -0.0002480440608680557 -0.0006549666060686205 -0.0585758845650789
+                      rotation -0.7592607024856499 -0.6482773288637323 -0.05709369967256832 3.0120549001671972
                       children [
                         Transform {
                           children [
@@ -355,8 +358,8 @@ Robot {
                       boundingObject USE ELBOW_SHAPE
                       physics Physics {
                       }
-                      linearVelocity -0.02160082387950543 -0.0036012995951057157 0.00137064891323302
-                      angularVelocity -0.010866311710220039 -0.09636551198282103 -0.20653477281128832
+                      linearVelocity 3.3589888459803445e-06 -4.7039953918519825e-07 -5.60419787041014e-07
+                      angularVelocity 1.6101599806150748e-06 6.45272954884565e-06 4.1054186355765834e-06
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -387,16 +390,16 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
-        linearVelocity -0.009526695200168654 -0.024074646546886125 0.010278735624299191
-        angularVelocity -0.001074829776859687 -0.10015343650649494 -0.21228281981254654
+        linearVelocity 2.619932314553538e-06 -1.0639590016033418e-07 -8.358675204310479e-07
+        angularVelocity 1.6173755712410622e-06 6.4344578148550175e-06 4.117692046248126e-06
       }
     }
-    Hinge2Joint {
+    DEF Leg3 Hinge2Joint {
       jointParameters HingeJointParameters {
-        position -0.025879540239970522
+        position -0.18701766351260452
       }
       jointParameters2 JointParameters {
-        position -0.28692866558451585
+        position -0.11898399080611549
         axis 0 1 0
       }
       device [
@@ -410,8 +413,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -0.08509852998515191 0.0088263918235993 -0.04693437096256391
-        rotation -0.7174568925461028 -0.6965005880009874 0.0119389384942152 0.03607548680838944
+        translation -0.09170579898275817 0.003948758430953474 -0.03312029461971901
+        rotation -0.7938307951811443 0.6055237080989367 -0.056335668560742465 0.23518219716188934
         children [
           Transform {
             translation 0 0 -0.01
@@ -422,7 +425,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position -0.2036786969711898
+                      position -0.3992026376976284
                       axis 0 0 1
                     }
                     device [
@@ -431,8 +434,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -8.390511168643273e-06 -2.372309666381742e-05 -0.06002055998798756
-                      rotation 3.899961113757038e-05 5.5841399061334585e-05 -0.9999999976803842 1.5126770899566158
+                      translation -1.283957401176758e-05 -2.1640964215771323e-05 -0.06002055998798755
+                      rotation 4.028838105141616e-05 4.7118684233983395e-05 -0.999999998078338 1.708201030270905
                       children [
                         Transform {
                           children [
@@ -468,8 +471,8 @@ Robot {
                       boundingObject USE ELBOW_SHAPE
                       physics Physics {
                       }
-                      linearVelocity 0.008592014992446597 -0.08678647278331196 0.04844598679896611
-                      angularVelocity -0.1326692704968924 -0.19958317503354736 -0.16327917450147258
+                      linearVelocity -2.8090578674159686e-06 7.214598100841104e-07 3.4965152520406705e-06
+                      angularVelocity 1.1013937239039431e-06 6.663929760470217e-06 3.747052335805748e-06
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -500,16 +503,16 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
-        linearVelocity 0.00873580887057752 -0.06902516877055426 0.02650654950442029
-        angularVelocity -0.14233959083728345 -0.20554972061053375 -0.15950089319794303
+        linearVelocity -3.398798037743367e-07 4.6080413770400833e-07 1.1993728735165106e-06
+        angularVelocity 1.4578610957621692e-06 6.627329142187574e-06 4.023912327336809e-06
       }
     }
-    Hinge2Joint {
+    DEF Leg4 Hinge2Joint {
       jointParameters HingeJointParameters {
-        position -0.07412181028428975
+        position 0.08701811740951142
       }
       jointParameters2 JointParameters {
-        position -0.1130716749367367
+        position -0.28101600739332255
         axis 0 1 0
       }
       device [
@@ -523,8 +526,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -0.014227652699827342 -0.003838271351584706 -0.051813616271828525
-        rotation -0.5477386010617491 -0.8360750563215961 0.030998791972558132 0.1351791138798973
+        translation -0.005342790246171333 0.004667769174543206 -0.05339921144359901
+        rotation 0.2939335212651001 -0.9549212786182065 -0.04157447196139146 0.2940956413681222
         children [
           Transform {
             translation 0 0 -0.01
@@ -535,7 +538,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position 0.003678312721773332
+                      position 0.19920256820446536
                       axis 0 0 1
                     }
                     device [
@@ -544,8 +547,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -9.124303602422957e-14 2.4805564784673737e-11 -0.05999999999999981
-                      rotation 2.0671464983910785e-10 2.0747620128052894e-10 -1 1.567116994457683
+                      translation -4.908750150450327e-12 2.431519157931359e-11 -0.0599999999999998
+                      rotation 2.0671469586438472e-10 2.526163059129337e-10 -1 1.3715927389749911
                       children [
                         Transform {
                           children [
@@ -581,8 +584,8 @@ Robot {
                       boundingObject USE ELBOW_SHAPE
                       physics Physics {
                       }
-                      linearVelocity -0.018511873789764162 -0.00122164907426193 0.0013664799681007535
-                      angularVelocity 0.012744369247521613 0.11299155378893538 0.2640489845779476
+                      linearVelocity 1.8943254099398158e-06 1.1575986634532118e-06 -2.4599814078074614e-06
+                      angularVelocity 1.6476434556217144e-06 6.387224705795392e-06 4.097171660247132e-06
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -613,16 +616,16 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
-        linearVelocity -0.02599408291455516 -0.024534792286878226 0.011684279297268816
-        angularVelocity 0.0232618876388503 0.11836381449641548 0.2620224054096508
+        linearVelocity 2.0930104414385943e-06 7.205466167517463e-07 -1.900084265190905e-06
+        angularVelocity 1.6207733739058718e-06 6.448575024247617e-06 4.146099095229864e-06
       }
     }
-    Hinge2Joint {
+    DEF Leg5 Hinge2Joint {
       jointParameters HingeJointParameters {
-        position 1.3651811965934257e-05
+        position -0.08701700833487028
       }
       jointParameters2 JointParameters {
-        position 1.3657004619382042e-05
+        position -0.11898383714346505
         axis 0 1 0
       }
       device [
@@ -636,8 +639,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation 0.0799991768444761 1.3351954298322593e-05 -0.060001051833582786
-        rotation 0.7069723150994799 0.7072412216914227 4.82756208661944e-06 1.9310249151744256e-05
+        translation 0.08655657053712107 -0.004339784001908479 -0.049891092059343625
+        rotation -0.5897385962603389 -0.8068299343813065 0.03512613083079094 0.1473776675391274
         children [
           Transform {
             translation 0 0 -0.01
@@ -648,7 +651,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position 5.190968791276559e-06
+                      position 0.0007974686133837561
                       axis 0 0 1
                     }
                     device [
@@ -657,8 +660,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation 8.244227989425618e-28 -1.5881867760804151e-22 -0.06000000000000031
-                      rotation -1.1679410388111004e-20 -3.59369791849599e-21 -1 1.5707901162107714
+                      translation 1.2665289718894975e-25 -1.5881862710932344e-22 -0.0600000000000003
+                      rotation -1.1682614751008587e-20 -3.599750596507046e-21 -1 1.569997838566179
                       children [
                         Transform {
                           children [
@@ -697,6 +700,8 @@ Robot {
                       recognitionColors [
                         0 0 0
                       ]
+                      linearVelocity -8.640338539633728e-06 1.1025376618672097e-06 5.820316813417803e-06
+                      angularVelocity 8.514661946990665e-07 6.175500649348402e-06 3.0444094486374283e-06
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -726,6 +731,8 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
+        linearVelocity -2.8982305424588184e-06 8.300472072894937e-07 1.9635302986282464e-06
+        angularVelocity 1.4021448399145019e-06 6.1613790494909485e-06 3.7545240750111232e-06
       }
     }
   ]
@@ -734,8 +741,8 @@ Robot {
   physics Physics {
   }
   controller "my_controller_c"
-  linearVelocity -0.017956784233153122 -0.04606107213491399 0.020764486574234117
-  angularVelocity -0.064226863977672 -0.04348474261767729 0.05301442425452301
+  linearVelocity 2.6339681052385125e-06 3.9371234432943624e-07 -1.5985423934885703e-06
+  angularVelocity 1.625631720022984e-06 6.446395842960462e-06 4.1252948323592665e-06
 }
 Solid {
   translation -0.52 0.047945398404552295 -0.8
