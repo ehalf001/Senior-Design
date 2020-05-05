@@ -48,9 +48,11 @@ int main(int argc, char **argv) {
    WbDeviceTag Hexabot_GPS = wb_robot_get_device("Hexabot_GPS");
    wb_gps_enable(Hexabot_GPS,10);
    const double *pos = wb_gps_get_values(Hexabot_GPS);
-   double x = pos[0];
-   double y = pos[1];
-   double z = pos[2];
+   double pos_x = pos[0];
+   double pos_y = pos[1];
+   double pos_z = pos[2];
+   
+   double vel = wb_gps_get_speed(Hexabot_GPS);
    
    //Robot Walking Motors
    WbDeviceTag Hexabot_Motors[18] = {wb_robot_get_device("Hexabot_Leg0_Motor1"), wb_robot_get_device("Hexabot_Leg0_Motor2"), wb_robot_get_device("Hexabot_Leg0_Motor3"),
@@ -62,7 +64,7 @@ int main(int argc, char **argv) {
                                      };
    
    //Robot Walking Variables
-   const double f = .5;
+   const double f = 1;
    const double a[18] = {.1, .1, -.1, -.1, -.1, .1, .1, .1, -.1, .1, .1, -.1, -.1, -.1, .1, .1, .1, -.1};
    const double p[18] = {0, 2, 2.5, 0, 2, 2.5, 0, 2, 2.5, 0, 2, 2.5, 0, 2, 2.5, 0, 2, 2.5};
    const double d[18] = {-.1, -.2, -.3, .5, -.2, -.3, 1.1, -.2, -.3, -.1, -.2, -.3, 0, -.2, .1, 0, -.2, .1};
@@ -71,6 +73,8 @@ int main(int argc, char **argv) {
    int key;
    
    int i;//for loop
+   for (i = 0; i < 18; ++i)  // Apply a sinuosidal function for each motor.
+           wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * 1 + p[i]) + d[i]);
    while (wb_robot_step(TIME_STEP) != -1) 
    {
       double time = wb_robot_get_time();
@@ -100,13 +104,33 @@ int main(int argc, char **argv) {
       
       //printf("hello\n");
       //GPS print values
+      pos_x = pos[0];
+      pos_y = pos[1];
+      pos_z = pos[2];
+      vel = wb_gps_get_speed(Hexabot_GPS);
+      if (vel >= 0.01) {
+        printf("Postion: x[%g] y[%g] z[%g]\n", pos_x,pos_y,pos_z);
+        printf("Velocity: %g\n", vel);
+      }
+      /*
       if(key == 'P')
       {
-      x = pos[0];
-      y = pos[1];
-      z = pos[2];
-      printf("Postion: x[%g] y[%g] z[%g]\n", x,y,z);
+      pos_x = pos[0];
+      pos_y = pos[1];
+      pos_z = pos[2];
+      printf("Postion: x[%g] y[%g] z[%g]\n", pos_x,pos_y,pos_z);
       }
+      
+      if(key == 'V')
+      {
+        vel = wb_gps_get_speed(Hexabot_GPS);
+       //vel_x = vel[0];
+       // vel_y = vel[1];
+       // vel_z = vel[2];
+      printf("Velocity: %g\n", vel);
+      }
+      */
+      
  
    };
 
