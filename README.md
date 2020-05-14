@@ -7,4 +7,4 @@ We are using terrain mapping and recognition tactics to improve upon a base walk
 ### Prerequisites
 * Webots (most recent installation)
 * blender (release 2.79) (for creating models)
-** [Blender addon to convert models to webots files](https://github.com/cyberbotics/blender-webots-exporter)
+* [Blender addon to convert models to webots files](https://github.com/cyberbotics/blender-webots-exporter)
