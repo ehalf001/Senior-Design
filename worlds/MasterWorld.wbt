@@ -2,31 +2,35 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.7255660832193348 -0.5844051608800462 -0.36335171228235696 0.36301843039373805
-  position -0.12171243621861678 1.600784164241422 3.315581293458996
+  orientation 0.28629765454451056 0.9073590316662163 0.307787655139153 4.954913096391459
+  position -2.7280819971151926 1.935680054548466 0.9237345152909735
   follow "Hexabot"
   followType "None"
 }
-TexturedBackground {
-}
-TexturedBackgroundLight {
-}
-RectangleArena {
-  translation 0 -0.05 0
-  floorSize 10 10
-  wallHeight 0.5
+Background {
+  skyColor [
+    0.15 0.45 1
+  ]
 }
 Robot {
-  translation 0.24024624463405023 0.050407134988549304 -0.20399088042100588
-  rotation 0.00019116799644264105 -0.9999999813914519 -2.5920899517649686e-05 -1.5358853071795862
+  translation 0.24511663347423515 0.06535842604269655 0.006609961505893032
+  rotation 0.6187076656471301 0.30064057977407543 -0.7258209601978899 0.030942345254220786
   children [
     Display {
+      name "Lidar_Display"
     }
     HokuyoUtm30lx {
-      translation 0 0.08 0
-      rotation 0 1 0 -1.5
+      translation 0 0.1 0
+      rotation 0 1 0 -1.5708
+    }
+    Compass {
+      name "Hexabot_Compass"
+    }
+    Gyro {
+      name "Hexabot_Gyro"
     }
     GPS {
+      name "Hexabot_GPS"
     }
     Camera {
       translation 0.1 -1.12008e-13 -1.49482e-07
@@ -67,10 +71,11 @@ Robot {
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position -6.734028057940771e-06
+        position -0.012981386956526595
       }
       jointParameters2 JointParameters {
-        position -6.0358702060130416e-06
+        position -0.1914088472341802
+        axis 0 1 0
       }
       device [
         DEF SHOULDER_2_x RotationalMotor {
@@ -83,8 +88,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation 0.0799999998036248 4.031448767281256e-05 0.07000002227909355
-        rotation 3.017932730624018e-06 0.9999999999897776 -3.367017041143465e-06 3.141590816145426
+        translation 0.0807377801181699 -0.011335420000952695 0.045800373741836056
+        rotation 0.9868197563602719 0.02671534496990103 -0.15960281576523985 2.0631896395548854
         children [
           Transform {
             children [
@@ -94,7 +99,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position 3.2972237568432274e-06
+                      position -0.25977402345509154
                       axis 0 0 1
                     }
                     device [
@@ -103,8 +108,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation 3.054387025886473e-17 -9.263447297811338e-12 -0.0600000000000013
-                      rotation -7.771335085885436e-11 -7.667767462809623e-11 -1 1.5707920099548691
+                      translation -0.00015410489837316537 -0.0007191024475457361 -0.0585639024163616
+                      rotation -0.7068784544687737 -0.6919885328314755 -0.14654255708694078 2.822181328998887
                       children [
                         Transform {
                           children [
@@ -174,43 +179,45 @@ Robot {
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position -7.581841756027127e-06
+        position 0.4129818785409305
       }
       jointParameters2 JointParameters {
-        position -7.032295786343949e-06
+        position -0.20859115362248712
+        axis 0 1 0
       }
       device [
-        DEF SHOULDER_1_x RotationalMotor {
+        DEF SHOULDER_2_x RotationalMotor {
           name "Hexabot_Leg1_Motor1"
         }
       ]
       device2 [
-        DEF SHOULDER_1_y RotationalMotor {
+        DEF SHOULDER_0_y RotationalMotor {
           name "Hexabot_Leg1_Motor2"
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -7.862390305663633e-10 1.7588381592453218e-05 0.06999995322477312
-        rotation 3.5161422411590934e-06 0.9999999999866329 -3.7909255426117353e-06 3.1415899997690717
+        translation -0.0015048001434579353 -0.014687662239572994 0.057989433410644
+        rotation 0.9965392549450919 0.021688308141102057 -0.08024419383019593 1.696532678337353
         children [
           Transform {
             children [
               DEF FEMUR_0 Solid {
-                translation 0 0.0259808 -0.045
+                translation 0 0.025981 -0.0450019
                 rotation 1 0 0 0.523599
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position 3.942016482304858e-06
+                      position -0.3402260025306397
+                      axis 0 0 1
                     }
                     device [
-                      DEF ELBOW_1 RotationalMotor {
+                      DEF ELBOW_0 RotationalMotor {
                         name "Hexabot_Leg1_Motor3"
                       }
                     ]
                     endPoint Solid {
-                      translation 0 2.365082146352276e-07 -0.05999999999953299
-                      rotation 1.9709039746979863e-06 1.9709016119116633e-06 -0.9999999999961156 1.5707953071850733
+                      translation -0.00020474587337447188 -0.0005927196365783553 -0.05861795080600524
+                      rotation -0.7334436943051184 -0.6623939538923352 -0.15262567651263306 2.8340229265495616
                       children [
                         Transform {
                           children [
@@ -280,41 +287,45 @@ Robot {
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position -8.164027698371874e-06
+        position 1.1870160870141497
       }
       jointParameters2 JointParameters {
-        position -7.807107715519631e-06
+        position -0.19140966380763363
+        axis 0 1 0
       }
       device [
         DEF SHOULDER_2_x RotationalMotor {
+          name "Hexabot_Leg2_Motor1"
         }
       ]
       device2 [
-        DEF SHOULDER_2_y RotationalMotor {
+        DEF SHOULDER_0_y RotationalMotor {
+          name "Hexabot_Leg2_Motor2"
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -0.07999999853108426 1.7833706386060106e-05 0.06999994574202761
-        rotation 3.903545107874493e-06 0.9999999999840499 -4.082019024758488e-06 3.1415899959557403
+        translation -0.0874928151676041 -0.0015395029390341194 0.05127691329771361
+        rotation 0.9954758480648372 -0.03282641216053739 -0.08916424498788546 2.267078900328971
         children [
           Transform {
             children [
               DEF FEMUR_0 Solid {
-                translation 0 0.0259808 -0.045
+                translation 0 0.025981 -0.0450019
                 rotation 1 0 0 0.523599
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position 4.09560660725244e-06
+                      position -0.2597760786438759
+                      axis 0 0 1
                     }
                     device [
-                      DEF ELBOW_2 RotationalMotor {
+                      DEF ELBOW_0 RotationalMotor {
                         name "Hexabot_Leg2_Motor3"
                       }
                     ]
                     endPoint Solid {
-                      translation 0 2.4572294115573906e-07 -0.0599999999994971
-                      rotation 2.047693264156791e-06 2.0476911762396147e-06 -0.9999999999958068 1.5707953071836145
+                      translation -0.00015461289485456929 -0.0006830826918768008 -0.058575884565078846
+                      rotation -0.712441260301945 -0.6997688169207997 -0.05245048602864197 3.004415093024306
                       children [
                         Transform {
                           children [
@@ -384,10 +395,11 @@ Robot {
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position 7.93067615896807e-06
+        position -0.18701842185931378
       }
       jointParameters2 JointParameters {
-        position 7.264383937575185e-06
+        position -0.11898370058349454
+        axis 0 1 0
       }
       device [
         DEF SHOULDER_3_x RotationalMotor {
@@ -400,8 +412,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -0.07999999922550173 1.6231063097176295e-05 -0.0599999593905987
-        rotation 0.7374043094297252 -2.6783940104717873e-06 0.6754516151637336 1.0754840185674835e-05
+        translation -0.09170580821432617 0.003948738262834857 -0.033120271463227074
+        rotation -0.7938313835395989 0.6055229219440538 -0.05633582792452287 0.23518297487319859
         children [
           Transform {
             translation 0 0 -0.01
@@ -412,7 +424,8 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position 4.243919489431616e-06
+                      position -0.39920276136958666
+                      axis 0 0 1
                     }
                     device [
                       DEF ELBOW_3 RotationalMotor {
@@ -420,8 +433,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation 0 2.546366995647185e-07 -0.059999999999461144
-                      rotation 2.1219746599721357e-06 2.121972496294214e-06 -0.9999999999954973 1.5707953071839285
+                      translation -1.2839576688147883e-05 -2.1640962627875865e-05 -0.06002055998798716
+                      rotation 4.028838179455365e-05 4.711867920424447e-05 -0.9999999980783382 1.708201153942852
                       children [
                         Transform {
                           children [
@@ -491,10 +504,11 @@ Robot {
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position 7.1495809896697105e-06
+        position 0.08701811606898441
       }
       jointParameters2 JointParameters {
-        position 6.615926572703057e-06
+        position -0.2810160031576002
+        axis 0 1 0
       }
       device [
         DEF SHOULDER_4_x RotationalMotor {
@@ -507,8 +521,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -2.6415225543741284e-09 1.7124052868790337e-05 -0.05999995070901307
-        rotation 0.7339682080537471 -2.4279398855998715e-06 0.6791838260445227 9.740983785635363e-06
+        translation -0.005342790473218046 0.00466776910099327 -0.053399211427310564
+        rotation 0.29393351841055 -0.9549213016405199 -0.041573963342095226 0.2940956366714626
         children [
           Transform {
             translation 0 0 -0.01
@@ -519,7 +533,8 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position 3.6638029713403457e-06
+                      position 0.1992026944130039
+                      axis 0 0 1
                     }
                     device [
                       DEF ELBOW_4 RotationalMotor {
@@ -527,8 +542,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation 0 2.1985298401390052e-07 -0.0599999999995992
-                      rotation 1.8321100681823271e-06 1.8321082001708884e-06 -0.9999999999966434 1.570795307182787
+                      translation -4.9087532192350874e-12 2.4315190959787247e-11 -0.05999999999999948
+                      rotation 2.067146958644188e-10 2.526163384385092e-10 -1 1.3715926127664297
                       children [
                         Transform {
                           children [
@@ -598,10 +613,11 @@ Robot {
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position 7.3996359556862885e-06
+        position -0.08701627280834168
       }
       jointParameters2 JointParameters {
-        position 7.019476834347498e-06
+        position -0.11898417985910363
+        axis 0 1 0
       }
       device [
         DEF SHOULDER_5_x RotationalMotor {
@@ -614,8 +630,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation 0.07999999403338093 1.80360126523746e-05 -0.05999994155711474
-        rotation 0.7254975062497504 -2.5463064692589568e-06 0.688224794975384 1.0199406718412725e-05
+        translation 0.08655658770013962 -0.004339744727665662 -0.04989106569929974
+        rotation -0.5897342366292587 -0.8068331278510577 0.03512597257563752 0.1473775102861309
         children [
           Transform {
             translation 0 0 -0.01
@@ -626,7 +642,8 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position 4.091920783586316e-06
+                      position 0.0007996067244468903
+                      axis 0 0 1
                     }
                     device [
                       DEF ELBOW_5 RotationalMotor {
@@ -634,8 +651,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation 0 2.455152470112925e-07 -0.05999999999949663
-                      rotation 2.045962477888242e-06 2.0459603917785617e-06 -0.999999999995814 1.5707953071837018
+                      translation 1.26992469052323e-25 -1.588186268381624e-22 -0.060000000000000234
+                      rotation -1.168262340202516e-20 -3.5997669372958465e-21 -1 1.5699957004551022
                       children [
                         Transform {
                           children [
@@ -710,15 +727,25 @@ Robot {
   boundingObject USE BODY_TRAN
   physics Physics {
   }
-  controller "camera_func"
+  controller "my_controller_c"
 }
-Can {
-  translation 0.21 0.01 -0.66
+RectangleArena {
+  translation 0 -0.05 0
+  floorSize 10 10
+  wallHeight 0.5
 }
 OilBarrel {
-  translation 0.39 0.4 -2.63
+  translation -3.01 0.44 -2.67
 }
 OilBarrel {
-  translation 2.28 0.4 -2.63
+  translation -3.01 0.44 3.02
+  name "oil barrel(2)"
+}
+OilBarrel {
+  translation 3.04 0.44 -2.67
   name "oil barrel(1)"
+}
+OilBarrel {
+  translation 3.04 0.44 2.99
+  name "oil barrel(3)"
 }
