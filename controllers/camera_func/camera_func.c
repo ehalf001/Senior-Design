@@ -7,14 +7,19 @@
 #include <webots/display.h>
 #include <webots/camera_recognition_object.h>
 #include <webots/distance_sensor.h>
+#include <assert.h>
 #include <math.h>
+#include <stdio.h>
 
 #define TIME_STEP 64
 
-#define FOREGROUND_COLOR 0xC030C0
-#define AXIS_COLOR 0xA0A0A0
-#define BLIND_SPOT_COLOR 0xC0C0C0
-#define BACKGROUND_COLOR 0xFFFFFF
+#define purple 0xC030C0
+#define black 0x000000
+#define gray 0xC0C0C0
+#define white 0xFFFFFF
+#define RED 0xBB2222
+#define GREEN 0x22BB11
+#define BLUE 0x2222BB
 
 // the lidar values are clamped between 0 and CLAMP_MAX
 #define CLAMP_MAX 1.0
@@ -23,29 +28,24 @@
 #define MIN(x, y) ((x) > (y) ? (y) : (x))
 
 // function displaying lidar values on a display
-static void Display(WbDeviceTag d,   // display
-                    int dw,          // display width
-                    int dh,          // display height
-                    const float *v,  // lidar values
-                    int ns,          // number of samples
-                    float fov        // field of view in radians
-) {
+// display, width, height, lidar vals, num of samples, fov
+static void Display(WbDeviceTag d, int dw, int dh, const float *v, int ns, float fov){
   int dw2 = dw / 2;
   int dh2 = dh / 2;
   float fov2 = fov / 2;
   const int px[] = {dw2, dw2 + dw * cos(-fov2 - M_PI_2), dw2 + dw * cos(fov2 - M_PI_2)};
   const int py[] = {dh2, dh2 + dh * sin(-fov2 - M_PI_2), dh2 + dh * sin(fov2 - M_PI_2)};
 
-  wb_display_set_color(d, BACKGROUND_COLOR);
+  wb_display_set_color(d, white);
   wb_display_fill_rectangle(d, 0, 0, dw, dh);
-  wb_display_set_color(d, BLIND_SPOT_COLOR);
+  wb_display_set_color(d, gray);
   wb_display_fill_polygon(d, px, py, 3);
-  wb_display_set_color(d, AXIS_COLOR);
+  wb_display_set_color(d, black);
   wb_display_draw_polygon(d, px, py, 3);
   wb_display_draw_line(d, dw2, 0, dw2, dh);
   wb_display_draw_line(d, 0, dh2, dw, dh2);
   wb_display_draw_oval(d, dw2, dh2, dw2, dh2);
-  wb_display_set_color(d, FOREGROUND_COLOR);
+  wb_display_set_color(d, purple);
 
   int i;
   for (i = 0; i < ns; i++) {
@@ -54,6 +54,8 @@ static void Display(WbDeviceTag d,   // display
     wb_display_draw_line(d, dw2, dh2, dw2 + f * cos(alpha) * dw2 / CLAMP_MAX, dh2 + f * sin(alpha) * dh2 / CLAMP_MAX);
   }
 }
+
+
 
 int main() { 
   wb_robot_init();
@@ -73,26 +75,56 @@ int main() {
   utm30lx = wb_robot_get_device("Hokuyo UTM-30LX");
   wb_lidar_enable(utm30lx, TIME_STEP);
   
-  // enable display
+  // enable display for lidar
   display = wb_robot_get_device("display");
-  wb_lidar_enable(display, TIME_STEP);  
+  //wb_lidar_enable(display, TIME_STEP); 
   
   // print gps coord
   const double *gps_values = wb_gps_get_values(gps);
   printf("Coord of robot: %.3f %.3f %.3f\n", gps_values[0], gps_values[1], gps_values[2]);
 
+  // lidar
   int utm30lx_samples = wb_lidar_get_horizontal_resolution(utm30lx);
   double utm30lx_field_of_view = wb_lidar_get_fov(utm30lx);
 
+  // for hokuyo
   int display_width = wb_display_get_width(display);
-  int display_height = wb_display_get_height(display);
+  int display_height = wb_display_get_height(display); 
 
   printf("tezt\n");
+  
+  
+  
   while (wb_robot_step(TIME_STEP) != -1) {
+   // print gps coord
+    //const double *gps_values = wb_gps_get_values(gps);
+    //printf("Using the GPS device: %.3f %.3f %.3f\n", gps_values[0], gps_values[1], gps_values[2]);
+  
+    // lidar display  
     const float *utm30lx_values = wb_lidar_get_range_image(utm30lx);
     Display(display, display_width, display_height, utm30lx_values, utm30lx_samples, utm30lx_field_of_view);
+
+    /*
+    printf("Horizontal Resolution : %d \n", utm30lx_samples);
+    printf("FOV : %f \n", utm30lx_field_of_view);
     
     
+    // try to get lidar values
+    const float *lidarValues = wb_lidar_get_range_image(utm30lx);
+    const float *lidarValueRange = wb_lidar_get_layer_range_image(utm30lx,0);
+    
+    printf("Range0 : %f \n", lidarValueRange[0]);
+  
+    // lidarValues range is resolution - 1080
+    printf("0 : %f \n", lidarValues[0]);
+    printf("360 : %f \n", lidarValues[360]);
+    printf("720 : %f \n", lidarValues[720]);
+    printf("1080 : %f \n", lidarValues[1079]);
+    */
+    
+    
+    
+ 
     // get current number of object recognized
     int number_of_objects = wb_camera_recognition_get_number_of_objects(camera);
     printf("\nRecognized %d objects.\n", number_of_objects);
@@ -112,11 +144,8 @@ int main() {
         printf("- Color %d/%d: %lf %lf %lf\n", j + 1, objects[i].number_of_colors, objects[i].colors[3 * j],
                objects[i].colors[3 * j + 1], objects[i].colors[3 * j + 2]);
     }
-    
-    
-    // print gps coord
-    const double *gps_values = wb_gps_get_values(gps);
-    printf("Using the GPS device: %.3f %.3f %.3f\n", gps_values[0], gps_values[1], gps_values[2]);
+
+
 
   }
   
