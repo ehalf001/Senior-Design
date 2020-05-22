@@ -3,7 +3,6 @@ build/release/my_controller_c.o: my_controller_c.c \
  C:\Users\Christian\ Legaspino\AppData\Local\Programs\Webots/include/controller/c/webots/types.h \
  C:\Users\Christian\ Legaspino\AppData\Local\Programs\Webots/include/controller/c/webots/nodes.h \
  C:\Users\Christian\ Legaspino\AppData\Local\Programs\Webots/include/controller/c/webots/motor.h \
- C:\Users\Christian\ Legaspino\AppData\Local\Programs\Webots/include/controller/c/webots/Keyboard.h \
  C:\Users\Christian\ Legaspino\AppData\Local\Programs\Webots/include/controller/c/webots/gyro.h \
  Auxillaries/GPS.c \
  C:\Users\Christian\ Legaspino\AppData\Local\Programs\Webots/include/controller/c/webots/gps.h \
