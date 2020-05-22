@@ -1,24 +1,11 @@
 #VRML_SIM R2020a utf8
 WorldInfo {
-}
-Viewpoint {
-  orientation 0.28629765454451056 0.9073590316662163 0.307787655139153 4.954913096391459
-  position -5.438867854648845 3.5681984540806972 1.963405953146152
-  follow "Hexabot"
-  followType "None"
-}
-Background {
-  skyColor [
-    0.15 0.45 1
-  ]
+  basicTimeStep 8
 }
 Robot {
-  translation 0.24511663347423515 0.06535842604269655 0.006609961505893032
-  rotation 0.6187076656471301 0.30064057977407543 -0.7258209601978899 0.030942345254220786
+  translation 1.124409203191629 0.38438582432305346 0.05435787341016443
+  rotation -0.6802514287485394 0.4953539255549048 -0.5402614942071263 -0.2860872563914917
   children [
-    Display {
-      name "Path_Display"
-    }
     Display {
       name "Lidar_Display"
     }
@@ -74,10 +61,10 @@ Robot {
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position -0.012981386956526595
+        position -0.07938909136424228
       }
       jointParameters2 JointParameters {
-        position -0.1914088472341802
+        position -0.12360207925440751
         axis 0 1 0
       }
       device [
@@ -91,8 +78,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation 0.08073778011816983 -0.01133542000095267 0.04580037374183598
-        rotation 0.9868197563602719 0.02671534496990103 -0.15960281576523985 2.0631896395548854
+        translation 0.08364520965328849 -0.008713323293643726 0.04089391176125945
+        rotation 0.9792551558152669 0.040889279680325276 -0.19846260760264528 2.0007696679077784
         children [
           Transform {
             children [
@@ -102,7 +89,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position -0.25977402345509154
+                      position -0.33941729376631197
                       axis 0 0 1
                     }
                     device [
@@ -111,8 +98,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -0.00015410489837316564 -0.0007191024475457374 -0.05856390241636171
-                      rotation -0.7068784544687737 -0.6919885328314755 -0.14654255708694078 2.822181328998887
+                      translation -0.00021082755271525062 -0.0007045625542029397 -0.05856390241636161
+                      rotation -0.7331761767845585 -0.6626740290395804 -0.15269520304196527 2.834099120942512
                       children [
                         Transform {
                           children [
@@ -148,6 +135,8 @@ Robot {
                       boundingObject USE ELBOW_SHAPE
                       physics Physics {
                       }
+                      linearVelocity -0.014579290523220824 -0.01783078402712608 -0.005287825752809181
+                      angularVelocity -0.23693919258766585 0.18353967190511053 0.16823888379838542
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -178,14 +167,16 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
+        linearVelocity -0.03642781504490358 -0.0425015872372143 -0.009147065746183897
+        angularVelocity -0.2709060479904463 0.06488361939280442 -0.06626027931201776
       }
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position 0.4129818785409305
+        position 0.479381190735814
       }
       jointParameters2 JointParameters {
-        position -0.20859115362248712
+        position -0.27640667269107927
         axis 0 1 0
       }
       device [
@@ -199,8 +190,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -0.0015048001434579423 -0.014687662239572977 0.057989433410644005
-        rotation 0.9965392549450917 0.021688308141102158 -0.08024419383019604 1.6965326783373529
+        translation -0.005499996141682719 -0.018393333907711036 0.05667628730804416
+        rotation 0.9980531867637766 -0.016720425856081387 -0.06008547037230594 1.7646484650123657
         children [
           Transform {
             children [
@@ -210,7 +201,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position -0.3402260025306397
+                      position -0.2605828016807981
                       axis 0 0 1
                     }
                     device [
@@ -219,8 +210,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -0.00020474587337447188 -0.0005927196365783553 -0.05861795080600524
-                      rotation -0.7334436943051184 -0.6623939538923352 -0.15262567651263306 2.8340229265495616
+                      translation -0.00015694066109281268 -0.0006071301912647763 -0.05861795080600525
+                      rotation -0.7071570412250374 -0.691718899968084 -0.14647143910262672 2.8221107463799964
                       children [
                         Transform {
                           children [
@@ -256,6 +247,8 @@ Robot {
                       boundingObject USE ELBOW_SHAPE
                       physics Physics {
                       }
+                      linearVelocity -0.094291194828408 -0.1170949764362294 -0.015450208580573705
+                      angularVelocity 0.36892163141509043 -0.33302363928004913 -0.31575864612510474
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -286,14 +279,16 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
+        linearVelocity -0.056645103822067416 -0.08382643615080285 -0.0065476636814057266
+        angularVelocity 0.33905709044429416 -0.1714891675682538 -0.10782037908569406
       }
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position 1.1870160870141497
+        position 1.1206265348297555
       }
       jointParameters2 JointParameters {
-        position -0.19140966380763363
+        position -0.12358523211284433
         axis 0 1 0
       }
       device [
@@ -307,8 +302,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -0.08749281516760414 -0.0015395029390341403 0.05127691329771361
-        rotation 0.9954758480648372 -0.03282641216053729 -0.08916424498788539 2.267078900328971
+        translation -0.08589370687642248 -0.003430514391646572 0.053825526496533146
+        rotation 0.9960567578675106 0.0015592732325731813 -0.08870458710489337 2.195040295085369
         children [
           Transform {
             children [
@@ -318,7 +313,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position -0.2597760786438759
+                      position -0.3394178147096745
                       axis 0 0 1
                     }
                     device [
@@ -327,8 +322,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -0.00015461289485456948 -0.0006830826918768012 -0.058575884565078846
-                      rotation -0.712441260301945 -0.6997688169207997 -0.05245048602864197 3.004415093024306
+                      translation -0.0002084672137543811 -0.0006686168798246509 -0.05857588456507884
+                      rotation -0.7396273569879798 -0.6707543676710999 -0.05513575106152485 3.0086998426898344
                       children [
                         Transform {
                           children [
@@ -364,6 +359,8 @@ Robot {
                       boundingObject USE ELBOW_SHAPE
                       physics Physics {
                       }
+                      linearVelocity -0.028558899047226388 -0.015489592039490024 0.012383431586515352
+                      angularVelocity -0.2830132306897545 -0.0065878780174259965 0.3436039234300506
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -394,14 +391,16 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
+        linearVelocity -0.045651317688336086 -0.04714567128655797 -0.0022970528324199302
+        angularVelocity -0.276110831743289 -0.0685611131294799 0.0860452803751783
       }
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position -0.18701842185931378
+        position -0.12061313101380408
       }
       jointParameters2 JointParameters {
-        position -0.11898370058349454
+        position -0.10643749948597037
         axis 0 1 0
       }
       device [
@@ -415,8 +414,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -0.091705808214326 0.003948738262834855 -0.03312027146322705
-        rotation -0.7938313835395986 0.6055229219440542 -0.056335827924522894 0.23518297487319859
+        translation -0.09209765688882836 0.006276514313564373 -0.03164059322402579
+        rotation -0.6122121730033544 0.7892883474446002 -0.04711857186591072 0.19660700738494216
         children [
           Transform {
             translation 0 0 -0.01
@@ -427,7 +426,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position -0.39920276136958666
+                      position -0.37244479527949587
                       axis 0 0 1
                     }
                     device [
@@ -436,8 +435,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -1.2839576688147883e-05 -2.1640962627875865e-05 -0.0600205599879871
-                      rotation 4.028838179455365e-05 4.711867920424447e-05 -0.9999999980783382 1.708201153942852
+                      translation -1.2255981420586216e-05 -2.197673570870333e-05 -0.06002055998798715
+                      rotation 4.012568866925656e-05 4.821982668049924e-05 -0.9999999980323887 1.6814431879047906
                       children [
                         Transform {
                           children [
@@ -473,6 +472,8 @@ Robot {
                       boundingObject USE ELBOW_SHAPE
                       physics Physics {
                       }
+                      linearVelocity -0.014484067918688963 -0.004785626435940445 -0.0129527213124468
+                      angularVelocity 0.32522275460602545 -0.1848500801588417 0.1492770628591425
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -503,14 +504,16 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
+        linearVelocity -0.03559156428567621 -0.034452178518883485 -0.003054933527310206
+        angularVelocity 0.31012159044513726 -0.0857247396639336 -0.002010128633795287
       }
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position 0.08701811606898441
+        position 0.02061160550085478
       }
       jointParameters2 JointParameters {
-        position -0.2810160031576002
+        position -0.29355910306577054
         axis 0 1 0
       }
       device [
@@ -524,8 +527,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation -0.005342790473218041 0.00466776910099326 -0.05339921142731049
-        rotation 0.29393351841055 -0.9549213016405199 -0.041573963342095226 0.2940956366714626
+        translation -0.004670042123201965 0.001115325486716895 -0.05365404006322087
+        rotation 0.06953787168361188 -0.9975263365702878 -0.010280673634270121 0.2942766214342049
         children [
           Transform {
             translation 0 0 -0.01
@@ -536,7 +539,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position 0.1992026944130039
+                      position 0.1724446057204483
                       axis 0 0 1
                     }
                     device [
@@ -545,8 +548,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation -4.908753219235092e-12 2.4315190959787273e-11 -0.05999999999999948
-                      rotation 2.0671469586441869e-10 2.526163384385092e-10 -1 1.3715926127664297
+                      translation -4.256445603988727e-12 2.4437819878183803e-11 -0.05999999999999948
+                      rotation 2.067146889459906e-10 2.458309676925425e-10 -1 1.3983507014589847
                       children [
                         Transform {
                           children [
@@ -582,6 +585,8 @@ Robot {
                       boundingObject USE ELBOW_SHAPE
                       physics Physics {
                       }
+                      linearVelocity -0.04129345779481383 -0.10723463333405577 -0.011456082626311913
+                      angularVelocity -0.20438717266225612 0.06689046623378472 -0.19444145522348222
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -612,14 +617,16 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
+        linearVelocity -0.034716788823297935 -0.0803167604005512 -0.009537128488555145
+        angularVelocity -0.25179338121477984 -0.060650053717485324 -0.07431858198894807
       }
     }
     Hinge2Joint {
       jointParameters HingeJointParameters {
-        position -0.08701627280834168
+        position -0.020610840295163815
       }
       jointParameters2 JointParameters {
-        position -0.11898417985910363
+        position -0.10644001207657791
         axis 0 1 0
       }
       device [
@@ -633,8 +640,8 @@ Robot {
         }
       ]
       endPoint DEF SHOULDER_0 Solid {
-        translation 0.08655658770013988 -0.004339744727665674 -0.049891065699299915
-        rotation -0.5897342366292587 -0.8068331278510577 0.03512597257563752 0.1473775102861309
+        translation 0.0859215890918498 -0.0010418718423439893 -0.05115065714338936
+        rotation -0.18993051023461283 -0.9817454019747043 0.010117657018581177 0.1084153206891264
         children [
           Transform {
             translation 0 0 -0.01
@@ -645,7 +652,7 @@ Robot {
                 children [
                   HingeJoint {
                     jointParameters HingeJointParameters {
-                      position 0.0007996067244468903
+                      position 0.02755545057873377
                       axis 0 0 1
                     }
                     device [
@@ -654,8 +661,8 @@ Robot {
                       }
                     ]
                     endPoint Solid {
-                      translation 1.2699246905232292e-25 -1.588186268381623e-22 -0.060000000000000234
-                      rotation -1.168262340202516e-20 -3.5997669372958465e-21 -1 1.5699957004551022
+                      translation 4.375766417485248e-24 -1.587583856875166e-22 -0.06000000000000023
+                      rotation -1.1792356122015474e-20 -3.807039597293163e-21 -1 1.5432398566008154
                       children [
                         Transform {
                           children [
@@ -694,6 +701,8 @@ Robot {
                       recognitionColors [
                         0 0 0
                       ]
+                      linearVelocity -0.01588232144003301 -0.008292816568515316 0.022548051874968243
+                      angularVelocity 0.2893344122961068 -0.20408895409065003 0.12815569368495205
                     }
                   }
                   DEF FEMUR_SHAPE Shape {
@@ -723,32 +732,467 @@ Robot {
         boundingObject USE SHOULDER_SHAPE
         physics Physics {
         }
+        linearVelocity -0.036221396792660995 -0.03852590346384239 0.02097764558302964
+        angularVelocity 0.310827828562059 -0.0850427291179489 -0.00716402895544732
       }
     }
   ]
-  name "Hexabot"
+  name "Hexabot(1)"
   boundingObject USE BODY_TRAN
   physics Physics {
   }
   controller "my_controller_c"
+  linearVelocity -0.04180843348058253 -0.059024302185773564 -0.0006468574937164422
+  angularVelocity 0.02965908523104556 -0.07260157042044689 -0.04187576153127967
+}
+Viewpoint {
+  orientation -0.29078745456746663 0.9162152187395577 0.2756670622620661 1.6076634718690161
+  position 7.805210959788265 4.863490514760991 0.6855367248980804
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
 }
 RectangleArena {
-  translation 0 -0.05 0
   floorSize 10 10
-  wallHeight 0.5
+  floorTileSize 1 1
+  wallThickness 0.025
+  wallHeight 2
+  wallAppearance SandyGround {
+    colorOverride 0.25 0.25 0.25
+  }
 }
-OilBarrel {
-  translation -3.01 0.44 -2.67
-}
-OilBarrel {
-  translation -3.01 0.44 3.02
-  name "oil barrel(2)"
-}
-OilBarrel {
-  translation 3.04 0.44 -2.67
-  name "oil barrel(1)"
-}
-OilBarrel {
-  translation 3.04 0.44 2.99
-  name "oil barrel(3)"
+DEF Cave_system Group {
+  children [
+    DEF Obstacle Solid {
+      translation 0 0.92 0
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -2.1 0.92 0
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(24)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 2.36 0.92 0
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(7)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 2.36 0.92 -1.51
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(8)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 1.28 0.92 -2.87
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(9)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -1.01 0.92 -2.87
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(10)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -3.47 0.92 -3.26
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(11)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -3.65 0.92 -1.39
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(12)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -2.69 0.92 3.48
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(13)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -0.22 0.92 4.08
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(15)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -0.7 0.92 4.08
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(26)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 1.47 0.92 2.87
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(16)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 2.87 0.92 1.29
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(17)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 2.87 0.92 4.17
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(18)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 3.69 0.92 2.7
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(19)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 3.69 0.92 2.05
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(28)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 3.69 0.92 -3.49
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(20)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -0.04 0.92 -4.06
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(21)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -1.7 0.92 -4.06
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(22)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 2.51 0.92 -3.87
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(23)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 1.82 0.92 -3.87
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(29)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 3.65 0.92 -1.39
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(14)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -0.17 0.92 -1.63
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(1)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -0.17 0.92 -2.37
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(27)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -1.99 0.92 -1.38
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(2)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -1.99 0.92 2.03
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(3)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -3.44 0.92 1.38
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(4)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -0.87 0.92 1.38
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(5)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation -0.05 0.92 2.6
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(25)"
+      boundingObject USE Cylinder
+    }
+    DEF Obstacle Solid {
+      translation 0.98 0.92 1.38
+      children [
+        DEF Cylinder Shape {
+          appearance StonePavement {
+          }
+          geometry Cylinder {
+            radius 0.25
+          }
+        }
+      ]
+      name "solid(6)"
+      boundingObject USE Cylinder
+    }
+    Pit {
+      translation 0 0.12 0
+      size 10 10 10
+      xDimension 10
+      zDimension 10
+      appearance SandyGround {
+        colorOverride 0.25 0.25 0.25
+      }
+      noiseAmplitude 0.85
+      pitRadius 2.5
+    }
+  ]
 }
