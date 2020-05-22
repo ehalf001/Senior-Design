@@ -7,7 +7,7 @@ centralWidgetVisible: 1
 selectionDisabled: 0
 viewpointLocked: 0
 orthographicViewHeight: 1
-textFiles: 1 "controllers/my_controller_c/my_controller_c.c" "controllers/my_controller_c/Auxillaries/PathDisplay.c"
-renderingDevicePerspectives: Hexabot:Hexabot_Camera;1;2.375;0.321586;0
+textFiles: 0 "controllers/my_controller_c/my_controller_c.c" "controllers/my_controller_c/Auxillaries/PathDisplay.c"
 renderingDevicePerspectives: Hexabot:Path_Display;1;2.32813;0.00172712;0.222548
 renderingDevicePerspectives: Hexabot:Lidar_Display;1;2.35938;0;0
+renderingDevicePerspectives: Hexabot:Hexabot_Camera;1;2.375;0.321586;0

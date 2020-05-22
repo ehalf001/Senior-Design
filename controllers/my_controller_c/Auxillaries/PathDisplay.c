@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define GROUND_X 1.0
-#define GROUND_Z 1.0
+#define GROUND_X 10.0
+#define GROUND_Z 10.0
 
 #define white 0xFFFFFF
 #define black 0x000000
