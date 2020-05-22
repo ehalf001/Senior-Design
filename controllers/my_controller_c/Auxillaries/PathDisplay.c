@@ -39,7 +39,6 @@ struct PathDisplay PathDisplay_Init() {
 }
 
 struct PathDisplay PathDisplay_Loop(struct PathDisplay PathDisplayOld, struct GPS gps) {
-
     struct PathDisplay PathDisplayNew = PathDisplayOld;
     // display the robot position
     wb_display_set_opacity(PathDisplayNew.Hexabot_PathDisplay, 0.03);
