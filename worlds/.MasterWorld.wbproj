@@ -7,6 +7,6 @@ centralWidgetVisible: 1
 selectionDisabled: 0
 viewpointLocked: 0
 orthographicViewHeight: 1
-textFiles: 0 "controllers/my_controller_c/my_controller_c.c" "controllers/my_controller_c/Auxillaries/GPS.c"
-renderingDevicePerspectives: Hexabot:Lidar_Display;1;1;0;0
+textFiles: 0 "controllers/my_controller_c/my_controller_c.c" "controllers/my_controller_c/System/Walking.c" "controllers/my_controller_c/Auxillaries/GPS.c"
 renderingDevicePerspectives: Hexabot:Hexabot_Camera;1;1;0.0763081;0.0338983
+renderingDevicePerspectives: Hexabot:Lidar_Display;1;1;0;0
