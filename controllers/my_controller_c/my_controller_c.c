@@ -11,7 +11,6 @@
  * <webots/motor.h>, etc.
  */
 #include <webots/robot.h>
-#include <webots/camera.h>
 #include <webots/motor.h>
 #include <webots/Keyboard.h>
 
@@ -27,6 +26,7 @@
 
 #include "Auxillaries/GPS.c"
 #include "Auxillaries/Compass.c"
+#include "Auxillaries/Camera.c"
 
 #define purple 0xC030C0
 #define black 0x000000
@@ -76,30 +76,6 @@ int main(int argc, char **argv) {
   /* necessary to initialize webots stuff */
   wb_robot_init();
 
-   WbDeviceTag Hexabot_Camera = wb_robot_get_device("Hexabot_Camera");
-   wb_camera_enable(Hexabot_Camera, 10);
-     wb_camera_recognition_enable(Hexabot_Camera, TIME_STEP);
-   
-    // get current number of object recognized by the camera
-    int numObjects = wb_camera_recognition_get_number_of_objects(Hexabot_Camera);
-    printf("\nRecognized %d objects.\n", numObjects);
-
-    // get and display all the objects information
-    const WbCameraRecognitionObject *objects = wb_camera_recognition_get_objects(Hexabot_Camera);
-    for (int i = 0; i < numObjects; ++i) {
-      printf("Model of object %d: %s\n", i, objects[i].model);
-      printf("Id of object %d: %d\n", i, objects[i].id);
-      printf("Relative position of object %d: %lf %lf %lf\n", i, objects[i].position[0], objects[i].position[1],
-             objects[i].position[2]);
-      printf("Relative orientation of object %d: %lf %lf %lf %lf\n", i, objects[i].orientation[0], objects[i].orientation[1],
-             objects[i].orientation[2], objects[i].orientation[3]);
-      printf("Position of the object %d on the camera image: %d %d\n", i, objects[i].position_on_image[0],
-             objects[i].position_on_image[1]);
-      for (int j = 0; j < objects[i].number_of_colors; ++j)
-        printf("- Color %d/%d: %lf %lf %lf\n", j + 1, objects[i].number_of_colors, objects[i].colors[3 * j],
-               objects[i].colors[3 * j + 1], objects[i].colors[3 * j + 2]);
-    }
-
   WbDeviceTag utm30lx, Lidar_Display;
   // enable hokuyo lidar
   utm30lx = wb_robot_get_device("Hokuyo UTM-30LX");
@@ -107,7 +83,7 @@ int main(int argc, char **argv) {
   
   // enable display for lidar
   Lidar_Display = wb_robot_get_device("Lidar_Display");
-  wb_lidar_enable(Lidar_Display, TIME_STEP); 
+  //wb_lidar_enable(Lidar_Display, TIME_STEP); 
   
   // lidar
   int utm30lx_samples = wb_lidar_get_horizontal_resolution(utm30lx);
@@ -116,6 +92,9 @@ int main(int argc, char **argv) {
   // for hokuyo
   int display_width = wb_display_get_width(Lidar_Display);
   int display_height = wb_display_get_height(Lidar_Display); 
+  
+   //Camera Enable
+   struct Camera Cam = Camera_Init();
 
    //GPS Enable
    struct GPS Gps = GPS_Init();
@@ -179,7 +158,8 @@ int main(int argc, char **argv) {
            wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
         
       }
-
+      
+      Cam = Camera_Loop(Cam);
       Gps = GPS_Loop(Gps);
       COMP = Compass_Loop(COMP);
       if(Gps.quadrant == 1)
@@ -283,6 +263,7 @@ int main(int argc, char **argv) {
   COMP = Compass_Disable(COMP);
   wb_gyro_disable(Hexabot_Gyro);
   Gps = GPS_Disable(Gps);
+  
   wb_keyboard_disable();
   wb_robot_cleanup();//
 

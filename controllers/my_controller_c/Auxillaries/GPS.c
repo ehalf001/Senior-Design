@@ -1,15 +1,3 @@
-/*
- * File:          my_controller_c.c
- * Date:
- * Description:
- * Author:
- * Modifications:
- */
-
-/*
- * You may need to add include files like <webots/distance_sensor.h> or
- * <webots/motor.h>, etc.
- */
 #include <webots/robot.h>
 #include <webots/gps.h>
 
@@ -18,8 +6,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
-
 struct GPS
 {
   WbDeviceTag Hexabot_GPS;
@@ -27,8 +13,6 @@ struct GPS
   double *pos, x_destination, z_destination;
   int quadrant;
 };
-
-
 
 int Quadrant(double x1, double z1, double x2, double z2)
 {
@@ -42,8 +26,6 @@ int Quadrant(double x1, double z1, double x2, double z2)
        return 4;
    else return 0;
 }
-
-
 
 struct GPS GPS_Init() 
 {
@@ -88,10 +70,6 @@ struct GPS GPS_Loop(struct GPS oldGPS)
       return newGPS;
 }
 
-  /* Enter your cleanup code here */
-
-  /* This is necessary to cleanup webots resources */
-  
 struct GPS GPS_Disable(struct GPS oldGPS)
 {
   struct GPS newGPS = oldGPS;

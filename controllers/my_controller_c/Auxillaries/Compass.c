@@ -1,15 +1,3 @@
-/*
- * File:          my_controller_c.c
- * Date:
- * Description:
- * Author:
- * Modifications:
- */
-
-/*
- * You may need to add include files like <webots/distance_sensor.h> or
- * <webots/motor.h>, etc.
- */
 #include <webots/robot.h>
 #include <webots/compass.h>
 
@@ -18,13 +6,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 struct Compass
 {
     WbDeviceTag Hexabot_Compass;
     double degree;
 };
-
 
 double get_bearing_in_degrees(WbDeviceTag tag) 
 {
@@ -36,8 +22,6 @@ double get_bearing_in_degrees(WbDeviceTag tag)
      return bearing;
 }
 
-
-
 struct Compass Compass_Init() 
 {
      struct Compass CompassInit;
@@ -47,7 +31,6 @@ struct Compass Compass_Init()
      CompassInit.degree = get_bearing_in_degrees(CompassInit.Hexabot_Compass);
      return CompassInit;
 }   
-
 
 struct Compass Compass_Loop(struct Compass CompassOld) 
 {
