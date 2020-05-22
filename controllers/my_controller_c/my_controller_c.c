@@ -16,7 +16,6 @@
 #include <webots/Keyboard.h>
 
 #include <webots/gyro.h>
-#include <webots/compass.h>
 #include <webots/display.h>
 #include <webots/lidar.h>
 #include <webots/camera_recognition_object.h>
@@ -27,6 +26,7 @@
 #include <stdio.h>
 
 #include "Auxillaries/GPS.c"
+#include "Auxillaries/Compass.c"
 
 #define purple 0xC030C0
 #define black 0x000000
@@ -69,14 +69,6 @@ void Display(WbDeviceTag d, int dw, int dh, const float *v, int ns, float fov){
   }
 }
 
-double get_bearing_in_degrees(WbDeviceTag tag) {
-  const double *north = wb_compass_get_values(tag);
-  double rad = atan2(north[0], north[2]);
-  double bearing = (rad - 1.5708) / M_PI * 180.0;
-  if (bearing < -180.0)
-    bearing = bearing + 360.0;
-   return bearing;
-}
 
 
 
@@ -133,8 +125,7 @@ int main(int argc, char **argv) {
    wb_gyro_enable(Hexabot_Gyro,10);
 
    //Compass Engable
-   WbDeviceTag Hexabot_Compass = wb_robot_get_device("Hexabot_Compass");
-   wb_compass_enable(Hexabot_Compass, 10);
+   struct Compass COMP = Compass_Init();
    
    //Robot Walking Motors
    WbDeviceTag Hexabot_Motors[18] = {wb_robot_get_device("Hexabot_Leg0_Motor1"), wb_robot_get_device("Hexabot_Leg0_Motor2"), wb_robot_get_device("Hexabot_Leg0_Motor3"),
@@ -157,7 +148,6 @@ int main(int argc, char **argv) {
    int i;//for loop
    for (i = 0; i < 18; ++i)  // Apply a sinuosidal function for each motor.
            wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * 1 + p[i]) + d[i]);
-   double degree = get_bearing_in_degrees(Hexabot_Compass);
    
    while (wb_robot_step(TIME_STEP) != -1) 
    {
@@ -191,19 +181,18 @@ int main(int argc, char **argv) {
       }
 
       Gps = GPS_Loop(Gps);
-      printf("Degree: %g\n", degree);
-      degree = get_bearing_in_degrees(Hexabot_Compass);
+      COMP = Compass_Loop(COMP);
       if(Gps.quadrant == 1)
       {
          Gps.angle = 90 - Gps.angle;
-         if(degree > Gps.angle && abs(degree - Gps.angle) > 2)
+         if(COMP.degree > Gps.angle && abs(COMP.degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if(degree < Gps.angle && abs(degree - Gps.angle) > 2)
+         else if(COMP.degree < Gps.angle && abs(COMP.degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
@@ -220,14 +209,14 @@ int main(int argc, char **argv) {
        else if(Gps.quadrant == 2)
        {
          Gps.angle = -90 - Gps.angle;
-         if(degree > Gps.angle && abs(degree - Gps.angle) > 2)
+         if(COMP.degree > Gps.angle && abs(COMP.degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if(degree < Gps.angle && abs(degree - Gps.angle) > 2)
+         else if(COMP.degree < Gps.angle && abs(COMP.degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
@@ -243,14 +232,14 @@ int main(int argc, char **argv) {
        else if(Gps.quadrant == 3)
        {
          Gps.angle = -90 - Gps.angle;
-         if(degree > Gps.angle && abs(degree - Gps.angle) > 2)
+         if(COMP.degree > Gps.angle && abs(COMP.degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if(degree < Gps.angle && abs(degree - Gps.angle) > 2)
+         else if(COMP.degree < Gps.angle && abs(COMP.degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
@@ -266,14 +255,14 @@ int main(int argc, char **argv) {
        else if(Gps.quadrant == 4)
        {
          Gps.angle = 90 - Gps.angle;
-         if(degree > Gps.angle && abs(degree - Gps.angle) > 2)
+         if(COMP.degree > Gps.angle && abs(COMP.degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if(degree < Gps.angle && abs(degree - Gps.angle) > 2)
+         else if(COMP.degree < Gps.angle && abs(COMP.degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
@@ -291,7 +280,7 @@ int main(int argc, char **argv) {
   /* Enter your cleanup code here */
 
   /* This is necessary to cleanup webots resources */
-  wb_compass_disable(Hexabot_Compass);
+  COMP = Compass_Disable(COMP);
   wb_gyro_disable(Hexabot_Gyro);
   Gps = GPS_Disable(Gps);
   wb_keyboard_disable();
