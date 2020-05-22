@@ -14,7 +14,7 @@
 #include <webots/camera.h>
 #include <webots/motor.h>
 #include <webots/Keyboard.h>
-#include <webots/gps.h>
+
 #include <webots/gyro.h>
 #include <webots/compass.h>
 #include <webots/display.h>
@@ -25,6 +25,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "Auxillaries/GPS.c"
 
 #define purple 0xC030C0
 #define black 0x000000
@@ -77,20 +79,6 @@ double get_bearing_in_degrees(WbDeviceTag tag) {
 }
 
 
-int Quadrant(double x1, double z1, double x2, double z2)
-{
-   if(x2 > x1 && z2 > z1)
-       return 1;
-   else if(x2 > x1 && z2 < z1)
-       return 2;
-   else if(x2 < x1 && z2 < z1)
-       return 3;
-   else if(x2 < x1 && z2 > z1)
-       return 4;
-   else return 0;
-}
-
-
 
 int main(int argc, char **argv) {
   /* necessary to initialize webots stuff */
@@ -138,24 +126,12 @@ int main(int argc, char **argv) {
   int display_height = wb_display_get_height(Lidar_Display); 
 
    //GPS Enable
-   WbDeviceTag Hexabot_GPS = wb_robot_get_device("Hexabot_GPS");
-   wb_gps_enable(Hexabot_GPS,10);
-   const double *pos = wb_gps_get_values(Hexabot_GPS);
-   double pos_x = pos[0];
-   double pos_y = pos[1];
-   double pos_z = pos[2];
-   
-   double vel = wb_gps_get_speed(Hexabot_GPS);
+   struct GPS Gps = GPS_Init();
    
     //Gyro enable
    WbDeviceTag Hexabot_Gyro = wb_robot_get_device("Hexabot_Gyro");
    wb_gyro_enable(Hexabot_Gyro,10);
-   
-/*   const double *gyro = wb_gyro_get_values(Hexabot_Gyro);
-   double gyro_x = gyro[0];
-   double gyro_y = gyro[1];
-   double gyro_z = gyro[2];
- */  
+
    //Compass Engable
    WbDeviceTag Hexabot_Compass = wb_robot_get_device("Hexabot_Compass");
    wb_compass_enable(Hexabot_Compass, 10);
@@ -179,17 +155,9 @@ int main(int argc, char **argv) {
    int key;
    
    int i;//for loop
-   int quadrant;
-   double distance;
    for (i = 0; i < 18; ++i)  // Apply a sinuosidal function for each motor.
            wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * 1 + p[i]) + d[i]);
    double degree = get_bearing_in_degrees(Hexabot_Compass);
-   
-   const double x_destination = 3.04;
-   const double z_destination = 2.99;
-   
-   
-   double angle;
    
    while (wb_robot_step(TIME_STEP) != -1) 
    {
@@ -221,134 +189,98 @@ int main(int argc, char **argv) {
            wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
         
       }
-      
-      
-      
 
-      /*
-      if(angle < k/f + c-5/f)
-      {
-        for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
-           wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
-        for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
-           wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
-        angle += 1;
-      }*/
-      angle = (atan((x_destination - pos_x)/(z_destination - pos_z))) / M_PI * 180.0;
-      distance = sqrt(pow((x_destination - pos_x),2) + pow((z_destination - pos_z),2));
-        
-      pos_x = pos[0];
-      pos_y = pos[1];
-      pos_z = pos[2];
-      
-      vel = wb_gps_get_speed(Hexabot_GPS);
-      
+      Gps = GPS_Loop(Gps);
+      printf("Degree: %g\n", degree);
       degree = get_bearing_in_degrees(Hexabot_Compass);
-      
-      quadrant = Quadrant(pos_x, pos_z, x_destination, z_destination);
-      
-//      gyro_x = gyro[0];
-//      gyro_y = gyro[1];
-//      gyro_z = gyro[2];
-      if (vel >= 0.01)
+      if(Gps.quadrant == 1)
       {
-        printf("Postion: x[%g] y[%g] z[%g]\n", pos_x,pos_y,pos_z);
-        //printf("Velocity: %g\n", vel);
-        //printf("Angular velocity: x[%g] y[%g] z[%g]\n", gyro_x,gyro_y,gyro_z);
-        printf("Degrees: r[%g]\n", degree);
-        printf("Angle: r[%g]\n", angle); 
-        printf("Quadrant: %d\n", quadrant);
-        printf("Distance: %g\n", distance);
-      }
-      
-      if(quadrant == 1)
-      {
-         angle = 90 - angle;
-         if( degree > angle && abs(degree - angle) > 2)
+         Gps.angle = 90 - Gps.angle;
+         if(degree > Gps.angle && abs(degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if( degree < angle && abs(degree - angle) > 2)
+         else if(degree < Gps.angle && abs(degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if(distance > .5)
+         else if(Gps.distance > .5)
          {
            for (i = 0; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
          }
          
        }
-       else if(quadrant == 2)
+       else if(Gps.quadrant == 2)
        {
-         angle = -90 - angle;
-         if( degree > angle && abs(degree - angle) > 2)
+         Gps.angle = -90 - Gps.angle;
+         if(degree > Gps.angle && abs(degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if( degree < angle && abs(degree - angle) > 2)
+         else if(degree < Gps.angle && abs(degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if(distance > .5)
+         else if(Gps.distance > .5)
          {
            for (i = 0; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
          }
        }
-       else if(quadrant == 3)
+       else if(Gps.quadrant == 3)
        {
-         angle = -90 - angle;
-         if( degree > angle && abs(degree - angle) > 2)
+         Gps.angle = -90 - Gps.angle;
+         if(degree > Gps.angle && abs(degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if( degree < angle && abs(degree - angle) > 2)
+         else if(degree < Gps.angle && abs(degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if(distance > .5)
+         else if(Gps.distance > .5)
          {
            for (i = 0; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
          }
        }
-       else if(quadrant == 4)
+       else if(Gps.quadrant == 4)
        {
-         angle = 90 - angle;
-         if( degree > angle && abs(degree - angle) > 2)
+         Gps.angle = 90 - Gps.angle;
+         if(degree > Gps.angle && abs(degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if( degree < angle && abs(degree - angle) > 2)
+         else if(degree < Gps.angle && abs(degree - Gps.angle) > 2)
          {
            for (i = 0; i < 9; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(-2.0 * M_PI * f * time + p[i]) + d[i]);
            for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
          }
-         else if(distance > .5)
+         else if(Gps.distance > .5)
          {
            for (i = 0; i < 18; ++i)  // Apply a sinuosidal function for each motor.
              wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
@@ -361,7 +293,7 @@ int main(int argc, char **argv) {
   /* This is necessary to cleanup webots resources */
   wb_compass_disable(Hexabot_Compass);
   wb_gyro_disable(Hexabot_Gyro);
-  wb_gps_disable(Hexabot_GPS);
+  Gps = GPS_Disable(Gps);
   wb_keyboard_disable();
   wb_robot_cleanup();//
 
