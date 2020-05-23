@@ -8,18 +8,32 @@ We are using terrain mapping and recognition tactics to improve upon a base walk
 * [Webots](https://cyberbotics.com/doc/guide/installation-procedure) (most recent installation)
 
 # Functionalities
+text here
 ## Walking
+text here
 ### Base Walking Algorithm
+text here
 ### Optimizing Walking through Learning Approach
+text here
 
 ## Pathing
+text here
 ### Obstacle Detection
+text here
 #### Camera
+text here
 
 ## Mapping
+text here
 ### Lidar
+text here
 
 ## Display
+text here
 ### Camera
+text here
 ### Lidar
+text here
 ### Map
+text here
+
