@@ -19,17 +19,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "Auxillaries/GPS.c"
-#include "Auxillaries/Compass.c"
+
 #include "Auxillaries/Camera.c"
 #include "Auxillaries/Lidar.c"
-#include "System/Walking.c"
+#include "System/DecisionTree.c"
+
 
 
 int main(int argc, char **argv) {
   /* necessary to initialize webots stuff */
   wb_robot_init();
-  double time = wb_robot_get_time();
   
   //Lidar Enable
   struct Lidar lidar = Lidar_Init();
@@ -48,7 +47,6 @@ int main(int argc, char **argv) {
 
    while (wb_robot_step(TIME_STEP) != -1) 
    {
-      time = wb_robot_get_time();
       
       //Camera Update
       Cam = Camera_Loop(Cam);
@@ -62,47 +60,7 @@ int main(int argc, char **argv) {
       //Compass Update
       COMP = Compass_Loop(COMP);
       
-      if(Gps.quadrant == 1)
-      {
-         Gps.angle = 90 - Gps.angle;
-         if(COMP.degree > Gps.angle && abs(COMP.degree - Gps.angle) > 2)
-           WalkPatt = TurnLEFT(WalkPatt, time);
-         else if(COMP.degree < Gps.angle && abs(COMP.degree - Gps.angle) > 2)
-            WalkPatt = TurnRIGHT(WalkPatt, time);
-         else if(Gps.distance > .5)
-            WalkPatt = Foward(WalkPatt, time);
-         
-       }
-       else if(Gps.quadrant == 2)
-       {
-         Gps.angle = -90 - Gps.angle;
-         if(COMP.degree > Gps.angle && abs(COMP.degree - Gps.angle) > 2)
-            WalkPatt = TurnLEFT(WalkPatt, time);
-         else if(COMP.degree < Gps.angle && abs(COMP.degree - Gps.angle) > 2)
-            WalkPatt = TurnRIGHT(WalkPatt, time);
-         else if(Gps.distance > .5)
-            WalkPatt = Foward(WalkPatt, time);
-       }
-       else if(Gps.quadrant == 3)
-       {
-         Gps.angle = -90 - Gps.angle;
-         if(COMP.degree > Gps.angle && abs(COMP.degree - Gps.angle) > 2)
-            WalkPatt = TurnLEFT(WalkPatt, time);
-         else if(COMP.degree < Gps.angle && abs(COMP.degree - Gps.angle) > 2)
-            WalkPatt = TurnRIGHT(WalkPatt, time);
-         else if(Gps.distance > .5)
-            WalkPatt = Foward(WalkPatt, time);
-       }
-       else if(Gps.quadrant == 4)
-       {
-         Gps.angle = 90 - Gps.angle;
-         if(COMP.degree > Gps.angle && abs(COMP.degree - Gps.angle) > 2)
-            WalkPatt = TurnLEFT(WalkPatt, time);
-         else if(COMP.degree < Gps.angle && abs(COMP.degree - Gps.angle) > 2)
-            WalkPatt = TurnRIGHT(WalkPatt, time);
-         else if(Gps.distance > .5)
-            WalkPatt = Foward(WalkPatt, time);
-       }
+      WalkPatt = DecisionTree_Pattern(WalkPatt, Gps, COMP);
    };
 
   /* Enter your cleanup code here */
