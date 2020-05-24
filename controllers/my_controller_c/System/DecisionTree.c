@@ -79,11 +79,5 @@ struct Walking DecisionTree_Pattern(struct Walking Walkstate, struct GPS GpsStat
       }
     }
     return newState;
-<<<<<<< HEAD
 }
 
-
-
-=======
-}
->>>>>>> chris-path-display

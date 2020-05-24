@@ -1,4 +1,3 @@
-
 /*
  * File:          my_controller_c.c
  * Date:
@@ -23,6 +22,7 @@
 #include "Auxillaries/Camera.c"
 #include "Auxillaries/Lidar.c"
 #include "System/DecisionTree.c"
+#include "Auxillaries/PathDisplay.c"
 
 
 
@@ -42,6 +42,9 @@ int main(int argc, char **argv) {
    //Compass Enable
    struct Compass COMP = Compass_Init();
    
+   //PathDisplay Enable
+   struct PathDisplay path = PathDisplay_Init();
+   
    //Walking Enable
    struct Walking WalkPatt = Walking_Init();
 
@@ -59,6 +62,9 @@ int main(int argc, char **argv) {
       
       //Compass Update
       COMP = Compass_Loop(COMP);
+      
+      //Path Display Update
+      path = PathDisplay_Loop(path,Gps);
       
       WalkPatt = DecisionTree_Pattern(WalkPatt, Gps, COMP);
    };

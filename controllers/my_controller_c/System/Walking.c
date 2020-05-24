@@ -93,11 +93,5 @@ struct Walking TurnRIGHT(struct Walking Robot, double time)
     for (i = 9; i < 18; ++i)  // Apply a sinuosidal function for each motor.
         wb_motor_set_position(Ret.Hexabot_Motors[i], Robot.a[i] * sin(2.0 * M_PI * Robot.f * time + Robot.p[i]) + Robot.d[i]);
     return Ret;
-<<<<<<< HEAD
 }
 
-
-
-=======
-}
->>>>>>> chris-path-display
