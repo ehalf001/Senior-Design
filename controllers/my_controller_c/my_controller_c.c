@@ -72,20 +72,21 @@ int main(int argc, char **argv) {
       
       if(getA == 280){
         printf("No object here...\n");
-      } else {
+      } 
+      else 
+      {
       
-      int d = getA / 270 * 1080;
-    
-      float dVal = lidar.lidar_utm30lx_values[d] + 0.305;
+        int d = getA / 270 * 1080;
       
-      float objX = Gps.pos_x + dVal * cos(M_PI_2 * (getA + 45 + COMP.degree) / 360);
-      float objZ = Gps.pos_z + (-1) * dVal * sin(M_PI_2 * (getA + 45 + COMP.degree) / 360);
-      
-      
-      printf("getA val : %f \n d : %f\n", getA, dVal);
-      printf("object x : %f \n object z : %f \n", objX, objZ);
-      printf("degree : %f\n", COMP.degree);
-     
+        float dVal = lidar.lidar_utm30lx_values[d] + 0.305;
+
+          double phi = 135 - COMP.degree - getA;
+          printf("Phi val : %f \n", phi);
+          phi = M_PI * phi / 180;
+          double objZ = Gps.pos_z - dVal*sin(phi);
+          double objX = Gps.pos_x + dVal*cos(phi);
+          printf("object x : %f \nobject z : %f \n", objX, objZ);
+
       }
       
    };

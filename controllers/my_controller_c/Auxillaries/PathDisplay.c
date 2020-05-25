@@ -37,9 +37,9 @@ struct PathDisplay PathDisplay_Init() {
   wb_display_set_opacity(PathDisplayInit.Hexabot_PathDisplay, 0.05);
   wb_display_set_color(PathDisplayInit.Hexabot_PathDisplay, black);
   wb_display_draw_line(PathDisplayInit.Hexabot_PathDisplay, 0, PathDisplayInit.height / 2, PathDisplayInit.width - 1, PathDisplayInit.height / 2);
-  wb_display_draw_text(PathDisplayInit.Hexabot_PathDisplay, "x", PathDisplayInit.width - 10, PathDisplayInit.height / 2 - 10);
+  wb_display_draw_text(PathDisplayInit.Hexabot_PathDisplay, "z", PathDisplayInit.width - 10, PathDisplayInit.height / 2 - 10);
   wb_display_draw_line(PathDisplayInit.Hexabot_PathDisplay, PathDisplayInit.width / 2, 0, PathDisplayInit.width / 2, PathDisplayInit.height - 1);
-  wb_display_draw_text(PathDisplayInit.Hexabot_PathDisplay, "z", PathDisplayInit.width / 2 - 10, PathDisplayInit.height - 10);
+  wb_display_draw_text(PathDisplayInit.Hexabot_PathDisplay, "x", PathDisplayInit.width / 2 - 10, PathDisplayInit.height - 10);
 
   return PathDisplayInit;
 }
