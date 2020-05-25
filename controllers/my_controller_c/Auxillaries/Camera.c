@@ -34,6 +34,7 @@ struct Camera Camera_Loop(struct Camera CameraOld)
 
     // get and display all the objects information
     const WbCameraRecognitionObject *objects = wb_camera_recognition_get_objects(CameraNew.Hexabot_Camera);
+/*
     for (int i = 0; i < CameraNew.numObjects; ++i) {
       printf("Model of object %d: %s\n", i, objects[i].model);
       printf("Id of object %d: %d\n", i, objects[i].id);
@@ -47,6 +48,7 @@ struct Camera Camera_Loop(struct Camera CameraOld)
         printf("- Color %d/%d: %lf %lf %lf\n", j + 1, objects[i].number_of_colors, objects[i].colors[3 * j],
                objects[i].colors[3 * j + 1], objects[i].colors[3 * j + 2]);
     }      
+*/
     return CameraNew;
 }
 

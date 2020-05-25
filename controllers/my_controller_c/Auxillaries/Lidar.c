@@ -40,9 +40,18 @@ void Display(WbDeviceTag d, int dw, int dh, const float *v, int ns, float fov){
   wb_display_draw_oval(d, dw2, dh2, dw2, dh2);
   wb_display_set_color(d, purple);
 
+  //printf("value of ns : %d\n", ns);
+
   int i;
   for (i = 0; i < ns; i++) {
     float f = MIN(CLAMP_MAX, v[i]);
+    /*
+    if(f < 1){
+      printf("value of v[%d] : %f \n", i, f);
+      float a = (float)i / ns * 270;
+      printf("angle of v[%d] : %f \n", i , a);
+    }
+    */
     float alpha = -fov2 + fov * i / ns - M_PI_2;
     wb_display_draw_line(d, dw2, dh2, dw2 + f * cos(alpha) * dw2 / CLAMP_MAX, dh2 + f * sin(alpha) * dh2 / CLAMP_MAX);
   }
@@ -53,7 +62,33 @@ struct Lidar
     WbDeviceTag Hexabot_Lidar, Display_Lidar;
     int lidar_utm30lx_samples, display_width, display_height;
     double lidar_utm30lx_fov;
+    float *lidar_utm30lx_values;
 };
+
+float getDisplay(struct Lidar lidar){
+   int i, startPt, endPt;
+   startPt = -1;
+   endPt = -1;
+   for(i = 0; i < 1080; ++i){
+     if(lidar.lidar_utm30lx_values[i] < 1 && startPt == -1){
+       startPt = i;
+     }
+     if(lidar.lidar_utm30lx_values[i] > 1 && startPt != -1){
+       endPt = i - 1;
+       break;
+     }
+   }
+   
+   int mid = (endPt + startPt) / 2;
+   float ret = mid / 1080.0 * 270.0;
+   
+   if(startPt == -1){return 280;}
+   
+   printf("Start point : %d\n End point : %d\n", startPt, endPt);
+   printf("Lidar at d value : %f\n", lidar.lidar_utm30lx_values[mid]);
+  
+   return ret;
+}
 
 struct Lidar Lidar_Init() 
 {
@@ -73,11 +108,11 @@ struct Lidar Lidar_Loop(struct Lidar LidarOld)
 {
     struct Lidar LidarNew = LidarOld;
     
-    const float *utm30lx_values = wb_lidar_get_range_image(LidarNew.Hexabot_Lidar);
+    LidarNew.lidar_utm30lx_values = wb_lidar_get_range_image(LidarNew.Hexabot_Lidar);
     Display(LidarNew.Display_Lidar, 
             LidarNew.display_width, 
             LidarNew.display_height, 
-            utm30lx_values, 
+            LidarNew.lidar_utm30lx_values, 
             LidarNew.lidar_utm30lx_samples, 
             LidarNew.lidar_utm30lx_fov);    
     return LidarNew;

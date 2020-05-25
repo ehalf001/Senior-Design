@@ -66,7 +66,28 @@ int main(int argc, char **argv) {
       //Path Display Update
       path = PathDisplay_Loop(path,Gps);
       
-      WalkPatt = DecisionTree_Pattern(WalkPatt, Gps, COMP);
+      //WalkPatt = DecisionTree_Pattern(WalkPatt, Gps, COMP);
+      
+      float getA = getDisplay(lidar);
+      
+      if(getA == 280){
+        printf("No object here...\n");
+      } else {
+      
+      int d = getA / 270 * 1080;
+    
+      float dVal = lidar.lidar_utm30lx_values[d] + 0.305;
+      
+      float objX = Gps.pos_x + dVal * cos(M_PI_2 * (getA + 45 + COMP.degree) / 360);
+      float objZ = Gps.pos_z + (-1) * dVal * sin(M_PI_2 * (getA + 45 + COMP.degree) / 360);
+      
+      
+      printf("getA val : %f \n d : %f\n", getA, dVal);
+      printf("object x : %f \n object z : %f \n", objX, objZ);
+      printf("degree : %f\n", COMP.degree);
+     
+      }
+      
    };
 
   /* Enter your cleanup code here */

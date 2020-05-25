@@ -60,6 +60,7 @@ struct GPS GPS_Loop(struct GPS oldGPS)
       
       newGPS.quadrant = Quadrant(oldGPS.pos_x, oldGPS.pos_z, oldGPS.x_destination, oldGPS.z_destination);
 
+/*
       if (newGPS.vel >= 0.01)
       {
         printf("Postion: x[%g] y[%g] z[%g]\n", newGPS.pos_x, newGPS.pos_y, newGPS.pos_z);
@@ -67,6 +68,7 @@ struct GPS GPS_Loop(struct GPS oldGPS)
         printf("Quadrant: %d\n", newGPS.quadrant);
         printf("Distance: %g\n", newGPS.distance);
       }
+*/
       return newGPS;
 }
 
