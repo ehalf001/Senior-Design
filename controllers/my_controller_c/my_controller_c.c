@@ -68,28 +68,33 @@ int main(int argc, char **argv) {
       
       //WalkPatt = DecisionTree_Pattern(WalkPatt, Gps, COMP);
       
-      float getA = getDisplay(lidar);
+      //float getA = getDisplay(lidar);
       
-      if(getA == 280){
-        printf("No object here...\n");
-      } 
-      else 
-      {
+      //if(getA == 280){
+      //  printf("No object here...\n");
+      //} 
+      //else 
+      //{
+      int i;
+      for(i = 0; i < 1080; ++i){
+        
+        if(lidar.lidar_utm30lx_values[i] < 1){
+          float getA = i / 1080.0 * 270.0;
       
-        int d = getA / 270 * 1080;
-      
-        float dVal = lidar.lidar_utm30lx_values[d] + 0.305;
+          float dVal = lidar.lidar_utm30lx_values[i] + 0.1;
 
           double phi = 135 - COMP.degree - getA;
-          printf("Phi val : %f \n", phi);
+          //printf("Phi val : %f \n", phi);
           phi = M_PI * phi / 180;
           objZ = Gps.pos_z - dVal*sin(phi);
           objX = Gps.pos_x + dVal*cos(phi);
           //printf("object x : %f \nobject z : %f \n", objX, objZ);
 
-      }
+
       
-      path = updateDisplayObstacles(path,objX,objZ);
+          path = updateDisplayObstacles(path,objZ,objX);
+          }
+      }
       
    };
 
