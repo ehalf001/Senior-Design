@@ -13,11 +13,15 @@
 #define white 0xFFFFFF
 #define black 0x000000
 #define blue 0x2222BB
+#define red 0xFF0000
+
+#define free_space 0
+#define walked 1
+#define obstacle 2
 
 struct PathDisplay{
   WbDeviceTag Hexabot_PathDisplay;
   int height, width;
-
   int color[4096];
 };
 
@@ -25,7 +29,7 @@ struct PathDisplay PathDisplay_Init() {
   struct PathDisplay PathDisplayInit;
   int i;
   for(i = 0; i < 4096; i++)
-    PathDisplayInit.color[i] = white;
+    PathDisplayInit.color[i] = free_space;
   
   PathDisplayInit.Hexabot_PathDisplay = wb_robot_get_device("Path_Display");
   
@@ -49,10 +53,26 @@ struct PathDisplay PathDisplay_Loop(struct PathDisplay PathDisplayOld, struct GP
     // display the robot position
     wb_display_set_opacity(PathDisplayNew.Hexabot_PathDisplay, 0.1);
     wb_display_set_color(PathDisplayNew.Hexabot_PathDisplay, blue);
-    wb_display_draw_pixel(PathDisplayNew.Hexabot_PathDisplay, PathDisplayNew.width * (gps.pos_x + GROUND_X / 2) / GROUND_X,
-                         PathDisplayNew.height * (gps.pos_z + GROUND_Z / 2) / GROUND_Z);
+    //wb_display_draw_pixel(PathDisplayNew.Hexabot_PathDisplay, PathDisplayNew.width * (gps.pos_x + GROUND_X / 2) / GROUND_X,
+    //                     PathDisplayNew.height * (gps.pos_z + GROUND_Z / 2) / GROUND_Z);
+    wb_display_draw_oval(PathDisplayNew.Hexabot_PathDisplay, PathDisplayNew.width * (gps.pos_x + GROUND_X / 2) / GROUND_X,
+                         PathDisplayNew.height * (gps.pos_z + GROUND_Z / 2) / GROUND_Z, 1, 1);
     
     int coordinate = PathDisplayNew.width * (gps.pos_x + GROUND_X / 2) / GROUND_X + 64*(PathDisplayNew.height * (gps.pos_z + GROUND_Z / 2) / GROUND_Z);
-    PathDisplayNew.color[coordinate] = blue;
+    PathDisplayNew.color[coordinate] = walked;
     return PathDisplayNew;
+}
+
+struct PathDisplay updateDisplayObstacles(struct PathDisplay path, double x, double z){
+  struct PathDisplay PathDisplayNew = path;
+  
+  wb_display_set_opacity(PathDisplayNew.Hexabot_PathDisplay, 1);
+  wb_display_set_color(PathDisplayNew.Hexabot_PathDisplay, red);
+  //wb_display_draw_pixel(PathDisplayNew.Hexabot_PathDisplay, PathDisplayNew.width * (x + GROUND_X / 2) / GROUND_X,
+  //                       PathDisplayNew.height * (z + GROUND_Z / 2) / GROUND_Z); 
+  wb_display_draw_oval(PathDisplayNew.Hexabot_PathDisplay, PathDisplayNew.width * (x + GROUND_X / 2) / GROUND_X,
+                         PathDisplayNew.height * (z + GROUND_Z / 2) / GROUND_Z, 1, 1); 
+  int coordinate = PathDisplayNew.width * (x + GROUND_X / 2) / GROUND_X + 64*(PathDisplayNew.height * (z + GROUND_Z / 2) / GROUND_Z);
+  PathDisplayNew.color[coordinate] = obstacle;
+  return PathDisplayNew;
 }

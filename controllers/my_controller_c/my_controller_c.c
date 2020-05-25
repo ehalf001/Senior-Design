@@ -24,7 +24,7 @@
 #include "System/DecisionTree.c"
 #include "Auxillaries/PathDisplay.c"
 
-
+double objZ, objX;
 
 int main(int argc, char **argv) {
   /* necessary to initialize webots stuff */
@@ -83,11 +83,13 @@ int main(int argc, char **argv) {
           double phi = 135 - COMP.degree - getA;
           printf("Phi val : %f \n", phi);
           phi = M_PI * phi / 180;
-          double objZ = Gps.pos_z - dVal*sin(phi);
-          double objX = Gps.pos_x + dVal*cos(phi);
-          printf("object x : %f \nobject z : %f \n", objX, objZ);
+          objZ = Gps.pos_z - dVal*sin(phi);
+          objX = Gps.pos_x + dVal*cos(phi);
+          //printf("object x : %f \nobject z : %f \n", objX, objZ);
 
       }
+      
+      path = updateDisplayObstacles(path,objX,objZ);
       
    };
 
