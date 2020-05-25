@@ -12,19 +12,14 @@
  */
 #include <webots/robot.h>
 
-
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-
-#include "Auxillaries/Camera.c"
-#include "Auxillaries/Lidar.c"
 #include "System/DecisionTree.c"
-#include "Auxillaries/PathDisplay.c"
-
-double objZ, objX;
+#include "System/MappingSystem.c"
+#include "Auxillaries/Camera.c"
 
 int main(int argc, char **argv) {
   /* necessary to initialize webots stuff */
@@ -36,19 +31,22 @@ int main(int argc, char **argv) {
   //Camera Enable
   struct Camera Cam = Camera_Init();
 
-   //GPS Enable
-   struct GPS Gps = GPS_Init();
+  //GPS Enable
+  struct GPS Gps = GPS_Init();
 
-   //Compass Enable
-   struct Compass COMP = Compass_Init();
+  //Compass Enable
+  struct Compass COMP = Compass_Init();
    
-   //PathDisplay Enable
-   struct PathDisplay path = PathDisplay_Init();
+  //PathDisplay Enable
+  struct PathDisplay path = PathDisplay_Init();
    
-   //Walking Enable
-   struct Walking WalkPatt = Walking_Init();
+  //Walking Enable
+  struct Walking WalkPatt = Walking_Init();
+   
+  //MappingSystem Enable
+  struct Map map = MappingSystem_Init();
 
-   while (wb_robot_step(TIME_STEP) != -1) 
+  while (wb_robot_step(TIME_STEP) != -1) 
    {
       
       //Camera Update
@@ -68,33 +66,7 @@ int main(int argc, char **argv) {
       
       //WalkPatt = DecisionTree_Pattern(WalkPatt, Gps, COMP);
       
-      //float getA = getDisplay(lidar);
-      
-      //if(getA == 280){
-      //  printf("No object here...\n");
-      //} 
-      //else 
-      //{
-      int i;
-      for(i = 0; i < 1080; ++i){
-        
-        if(lidar.lidar_utm30lx_values[i] < 1){
-          float getA = i / 1080.0 * 270.0;
-      
-          float dVal = lidar.lidar_utm30lx_values[i] + 0.1;
-
-          double phi = 135 - COMP.degree - getA;
-          //printf("Phi val : %f \n", phi);
-          phi = M_PI * phi / 180;
-          objZ = Gps.pos_z - dVal*sin(phi);
-          objX = Gps.pos_x + dVal*cos(phi);
-          //printf("object x : %f \nobject z : %f \n", objX, objZ);
-
-
-      
-          path = updateDisplayObstacles(path,objZ,objX);
-          }
-      }
+      MappingSystem(map,lidar,Gps,COMP,path);
       
    };
 
