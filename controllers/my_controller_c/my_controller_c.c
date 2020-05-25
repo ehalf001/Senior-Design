@@ -21,10 +21,12 @@
 #include "System/MappingSystem.c"
 #include "Auxillaries/Camera.c"
 
+
 int main(int argc, char **argv) {
   /* necessary to initialize webots stuff */
   wb_robot_init();
   
+  wb_keyboard_enable(TIME_STEP);
   //Lidar Enable
   struct Lidar lidar = Lidar_Init();
   
@@ -45,7 +47,8 @@ int main(int argc, char **argv) {
    
   //MappingSystem Enable
   struct Map map = MappingSystem_Init();
-
+  
+  
   while (wb_robot_step(TIME_STEP) != -1) 
    {
       
@@ -64,7 +67,9 @@ int main(int argc, char **argv) {
       //Path Display Update
       path = PathDisplay_Loop(path,Gps);
       
-      //WalkPatt = DecisionTree_Pattern(WalkPatt, Gps, COMP);
+      WalkPatt = DecisionTree_Pattern(WalkPatt, Gps, COMP);
+      
+      
       
       MappingSystem(map,lidar,Gps,COMP,path);
       
@@ -77,6 +82,7 @@ int main(int argc, char **argv) {
   Gps = GPS_Disable(Gps);
   Cam = Camera_Disable(Cam);
   lidar = Lidar_Disable(lidar);
+  wb_keyboard_disable();
   wb_robot_cleanup();//
 
   return 0;

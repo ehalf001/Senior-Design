@@ -11,6 +11,7 @@
  * <webots/motor.h>, etc.
  */
 #include <webots/robot.h>
+#include <webots/Keyboard.h>
 
 #include <string.h>
 #include <math.h>
@@ -28,7 +29,8 @@ struct Walking DecisionTree_Pattern(struct Walking Walkstate, struct GPS GpsStat
 {
    double time = wb_robot_get_time();
    struct Walking newState = Walkstate;
-   
+   int key;
+   /*
    bool GoalFound = true;
    bool NoObst = true;
    if(GoalFound)
@@ -77,7 +79,24 @@ struct Walking DecisionTree_Pattern(struct Walking Walkstate, struct GPS GpsStat
                newState = Foward(newState, time);
          }
       }
-    }
+      */
+      key = wb_keyboard_get_key();
+      if(key == WB_KEYBOARD_UP)
+      {
+        newState = Foward(newState, time);
+      }
+      else if(key == WB_KEYBOARD_DOWN)
+      {
+        newState = Backward(newState, time);
+      }
+      else if(key == WB_KEYBOARD_LEFT)
+      {
+        newState = TurnLEFT(newState, time);
+      }
+      else if(key == WB_KEYBOARD_RIGHT)
+      {
+        newState = TurnRIGHT(newState, time);
+      }
     return newState;
 }
 
