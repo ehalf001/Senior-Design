@@ -26,6 +26,32 @@ if(key == WB_KEYBOARD_UP)
 ```
 ## auxiliaries 
 
+* GPS
+    * Using a basic GPS device, our robot is able to find its velocity and relative position on the map.
+
+* Compass
+    * Using a basic Compass device, our robot is able to recognize its orientation to the map's polar axis.
+
+> example of compass declaration and initialization in controller
+```c
+struct Camera{
+    WbDeviceTag Hexabot_Camera;
+    int numObjects;
+};
+
+struct Camera Camera_Init() {
+    struct Camera CameraInit;
+    //Camera Enable   
+    CameraInit.Hexabot_Camera = wb_robot_get_device("Hexabot_Camera");
+    wb_camera_enable(CameraInit.Hexabot_Camera, TIME_STEP);
+    wb_camera_recognition_enable(CameraInit.Hexabot_Camera, TIME_STEP);
+    return CameraInit;
+} 
+```
+All devices are instantiated in this fashion for ease of access and readability.
+
+Each device has 4 associated structs. One for each of object definition, device initialization, device function steps, and device disabling.
+
 * Camera
     * Using a basic camera with a 144p resolution and a 31.25Hz refresh rate, paired with camera recognition capabilities, our robot scopes out its goal while it traverses the map.
     
