@@ -24,6 +24,17 @@ if(key == WB_KEYBOARD_UP)
     for (i = 0; i < 18; ++i)  // Apply a sinuosidal function for each motor.
         wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
 ```
+## auxiliaries 
+
+* Camera
+    * Using a basic camera with a 144p resolution and a 31.25Hz refresh rate, paired with camera recognition capabilities, our robot scopes out its goal while it traverses the map.
+    
+* Lidar
+    * Using the HokuyoUtm30lx Lidar, our robot maps is capable of recognizing walls and obstacles while maneuvering around them as it makes note of them on in its map memory and displaying it on a feed visible to the user.
+![readme_camera_lidar_example](https://github.com/ehalf001/Senior-Design/blob/master/README_source/Readme_Camera_Lidar_Example.png)
+> example of Camera and Lidar displays
+>camera display (left) shows known information on recognizable objects
+> lidar display (right) detects obstacles and translates it into a map that the robot uses to navigate the map
 
 ## Pathing
 text here
