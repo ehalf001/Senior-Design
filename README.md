@@ -32,9 +32,7 @@ if(key == WB_KEYBOARD_UP)
 * Lidar
     * Using the HokuyoUtm30lx Lidar, our robot maps is capable of recognizing walls and obstacles while maneuvering around them as it makes note of them on in its map memory and displaying it on a feed visible to the user.
 ![readme_camera_lidar_example](https://github.com/ehalf001/Senior-Design/blob/master/README_source/Readme_Camera_Lidar_Example.png)
-> example of Camera and Lidar displays
->camera display (left) shows known information on recognizable objects
-> lidar display (right) detects obstacles and translates it into a map that the robot uses to navigate the map
+>Camera display (left) shows known information on recognizable objects while lidar display (right) detects obstacles and translates it into a map that the robot uses to navigate the map.
 
 ## Pathing
 text here
