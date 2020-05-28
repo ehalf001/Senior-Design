@@ -68,9 +68,7 @@ int main(int argc, char **argv) {
       path = PathDisplay_Loop(path,Gps);
       
       WalkPatt = DecisionTree_Pattern(WalkPatt, Gps, COMP);
-      
-      
-      
+       
       MappingSystem(map,lidar,Gps,COMP,path);
       
    };

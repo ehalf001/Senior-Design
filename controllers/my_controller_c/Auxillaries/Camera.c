@@ -30,7 +30,7 @@ struct Camera Camera_Loop(struct Camera CameraOld)
     
     // get current number of object recognized by the camera
     CameraNew.numObjects = wb_camera_recognition_get_number_of_objects(CameraNew.Hexabot_Camera);
-    printf("\nRecognized %d objects.\n", CameraNew.numObjects);
+    //printf("\nRecognized %d objects.\n", CameraNew.numObjects);
 
     // get and display all the objects information
     //const WbCameraRecognitionObject *objects = wb_camera_recognition_get_objects(CameraNew.Hexabot_Camera);
