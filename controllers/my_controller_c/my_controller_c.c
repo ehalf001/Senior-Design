@@ -19,8 +19,6 @@
 
 #include "System/DecisionTree.c"
 #include "System/MappingSystem.c"
-#include "Auxillaries/Camera.c"
-
 
 int main(int argc, char **argv) {
   /* necessary to initialize webots stuff */
@@ -52,8 +50,6 @@ int main(int argc, char **argv) {
   while (wb_robot_step(TIME_STEP) != -1) 
    {
       
-      //Camera Update
-      Cam = Camera_Loop(Cam);
       
       //Lidar Update
       lidar = Lidar_Loop(lidar);
@@ -61,13 +57,16 @@ int main(int argc, char **argv) {
       //GPS Update
       Gps = GPS_Loop(Gps);
       
+      //Camera Update
+      Cam = Camera_Loop(Cam);
+
       //Compass Update
       COMP = Compass_Loop(COMP);
       
       //Path Display Update
       path = PathDisplay_Loop(path,Gps);
       
-      WalkPatt = DecisionTree_Pattern(WalkPatt, Gps, COMP);
+      WalkPatt = DecisionTree_Pattern(WalkPatt, &Gps, COMP, Cam);
       
       
       

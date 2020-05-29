@@ -26,6 +26,7 @@ struct Walking {
    double p[18];
    double d[18];
    WbDeviceTag Hexabot_Motors[18];
+   double x_destination, z_destination;
 };
 
 struct Walking Walking_Init()
@@ -52,6 +53,8 @@ struct Walking Walking_Init()
     }
     for (i = 0; i < 18; ++i)  // Apply a sinuosidal function for each motor.
            wb_motor_set_position(WalkInit.Hexabot_Motors[i], WalkInit.a[i] * sin(2.0 * M_PI * WalkInit.f * 1 + WalkInit.p[i]) + WalkInit.d[i]);
+   WalkInit.x_destination = 100;
+   WalkInit.z_destination = 100;
    return WalkInit;
 };
 

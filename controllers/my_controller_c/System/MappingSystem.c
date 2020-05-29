@@ -37,7 +37,7 @@ struct Map MappingSystem_Init(){
 void MappingSystem(struct Map map, struct Lidar lidar, struct GPS Gps, struct Compass COMP, struct PathDisplay path){
     int i;
     for(i = 0; i < 1080; ++i){ 
-      if(lidar.lidar_utm30lx_values[i] < 1){
+      if(lidar.lidar_utm30lx_values[i] < .75){
         float getA = i / 1080.0 * 270.0;
         float dVal = lidar.lidar_utm30lx_values[i];
         double phi = 135 - COMP.degree - getA;
