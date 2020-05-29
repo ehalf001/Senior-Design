@@ -33,14 +33,20 @@ struct Walking DecisionTree_Pattern(struct Walking Walkstate, struct GPS *GpsSta
    int key;
    bool GoalFound = Cam.goal;
    bool NoObst = true;
+   
+   
    if(GoalFound)
    {
-     if(GpsState->x_destination == 100 || GpsState->z_destination == 100)
-     {
+//     if(GpsState->x_destination == 100 || GpsState->z_destination == 100)
+//     {
+       
        GpsState->x_destination = GpsState->pos_x +.1 - Cam.x_relative*cos(CompState.degree*M_PI/180.0) + Cam.z_relative*sin(CompState.degree*M_PI/180.0);
        GpsState->z_destination = GpsState->pos_z - Cam.x_relative*sin(CompState.degree*M_PI/180.0) + Cam.z_relative*cos(CompState.degree*M_PI/180.0);// + .305*cos(M_PI - CompState.degree); 
-     }
-     if(NoObst)
+//       printf("x: %f z: %f\n", GpsState->x_destination, GpsState->z_destination);
+       if(GpsState->distance > .5)
+         newState = Foward(newState, time);
+//     }
+     /*if(NoObst)
      {
          if(GpsState->quadrant == 1)
          {
@@ -83,7 +89,8 @@ struct Walking DecisionTree_Pattern(struct Walking Walkstate, struct GPS *GpsSta
             else if(GpsState->distance > .5)
                newState = Foward(newState, time);
          }
-      }
+      }*/
+      
   }
   else
   {

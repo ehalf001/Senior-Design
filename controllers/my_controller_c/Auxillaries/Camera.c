@@ -25,6 +25,7 @@ struct Camera Camera_Init()
     CameraInit.Hexabot_Camera = wb_robot_get_device("Hexabot_Camera");
     wb_camera_enable(CameraInit.Hexabot_Camera, TIME_STEP);
     wb_camera_recognition_enable(CameraInit.Hexabot_Camera, TIME_STEP);
+
     return CameraInit;
 }   
 
@@ -59,7 +60,7 @@ struct Camera Camera_Loop(struct Camera CameraOld)
     {
       const WbCameraRecognitionObject *objects = wb_camera_recognition_get_objects(CameraNew.Hexabot_Camera);
       CameraNew.centerPixel = objects[0].position_on_image[0];
-      if(CameraNew.centerPixel > 29 && CameraNew.centerPixel < 35)
+      if(CameraNew.centerPixel > 30 && CameraNew.centerPixel < 34)
       {
         CameraNew.goal = true;
         CameraNew.x_relative = objects[0].position[2];

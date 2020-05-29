@@ -8,7 +8,7 @@ renderingMode: PLAIN
 selectionDisabled: 0
 viewpointLocked: 0
 orthographicViewHeight: 1
-textFiles: 3 "controllers/my_controller_c/my_controller_c.c" "controllers/my_controller_c/Auxillaries/Camera.c" "controllers/my_controller_c/Auxillaries/Compass.c" "controllers/my_controller_c/System/DecisionTree.c" "controllers/my_controller_c/Auxillaries/GPS.c" "controllers/my_controller_c/System/Walking.c"
-renderingDevicePerspectives: Hexabot:Hexabot_Camera;1;2.8125;0;0
+textFiles: 1 "controllers/my_controller_c/my_controller_c.c" "controllers/my_controller_c/Auxillaries/Camera.c" "controllers/my_controller_c/System/DecisionTree.c"
 renderingDevicePerspectives: Hexabot:Lidar_Display;0;3.96875;0;0.026616
+renderingDevicePerspectives: Hexabot:Hexabot_Camera;1;2.8125;0;0
 renderingDevicePerspectives: Hexabot:Path_Display;0;3.96875;0;0.026616
