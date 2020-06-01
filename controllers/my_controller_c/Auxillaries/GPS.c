@@ -6,11 +6,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 struct GPS
 {
   WbDeviceTag Hexabot_GPS;
   double pos_x, pos_y, pos_z, vel, distance, angle;
-  double *pos, x_destination, z_destination;
+  double x_destination, z_destination;
   int quadrant;
 };
 
@@ -35,13 +36,13 @@ struct GPS GPS_Init()
    struct GPS initGPS;
    initGPS.Hexabot_GPS = wb_robot_get_device("Hexabot_GPS");
    wb_gps_enable(initGPS.Hexabot_GPS,10);
-   initGPS.pos = wb_gps_get_values(initGPS.Hexabot_GPS);
-   initGPS.pos_x = initGPS.pos[0];
-   initGPS.pos_y = initGPS.pos[1];
-   initGPS.pos_z = initGPS.pos[2];
+   const double *pos = wb_gps_get_values(initGPS.Hexabot_GPS);
+   initGPS.pos_x = pos[0];
+   initGPS.pos_y = pos[1];
+   initGPS.pos_z = pos[2];
    initGPS.vel = wb_gps_get_speed(initGPS.Hexabot_GPS);
-   initGPS.x_destination = 3.04;
-   initGPS.z_destination = 2.99;
+   initGPS.x_destination = 100;
+   initGPS.z_destination = 100;
    return initGPS;
 }   
 
@@ -51,10 +52,10 @@ struct GPS GPS_Loop(struct GPS oldGPS)
  
       newGPS.angle = (atan((oldGPS.x_destination - oldGPS.pos_x)/(oldGPS.z_destination - oldGPS.pos_z))) / M_PI * 180.0;
       newGPS.distance = sqrt(pow((oldGPS.x_destination - oldGPS.pos_x),2) + pow((oldGPS.z_destination - oldGPS.pos_z),2));
-        
-      newGPS.pos_x = oldGPS.pos[0];
-      newGPS.pos_y = oldGPS.pos[1];
-      newGPS.pos_z = oldGPS.pos[2];
+      const double *pos = wb_gps_get_values(oldGPS.Hexabot_GPS);  
+      newGPS.pos_x = pos[0];
+      newGPS.pos_y = pos[1];
+      newGPS.pos_z = pos[2];
       
       newGPS.vel = wb_gps_get_speed(oldGPS.Hexabot_GPS);
       

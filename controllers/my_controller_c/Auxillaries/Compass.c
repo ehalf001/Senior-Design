@@ -35,7 +35,7 @@ struct Compass Compass_Init()
 struct Compass Compass_Loop(struct Compass CompassOld) 
 {
     struct Compass CompassNew = CompassOld;
-    //printf("Degree: %g\n", CompassNew.degree);
+//    printf("Degree: %g\n", CompassNew.degree);
     CompassNew.degree = get_bearing_in_degrees(CompassNew.Hexabot_Compass);
     return CompassNew;       
 }
