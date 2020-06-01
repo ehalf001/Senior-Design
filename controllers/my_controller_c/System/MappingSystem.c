@@ -51,11 +51,13 @@ void MappingSystem(struct Map map, struct Lidar lidar, struct GPS Gps, struct Co
         }
   }     
     
-    if(cnt > 20){
-      int coordinate = path.width * (Gps.pos_z + GROUND_Z / 2) / GROUND_Z + 64*(path.height * (Gps.pos_x + GROUND_X / 2) / GROUND_X);
+    if(cnt > 150 && Gps.vel > .1){
+      int z_coord = path.width * (Gps.pos_z + GROUND_Z / 2) / GROUND_Z; 
+      int x_coord = path.height * (Gps.pos_x + GROUND_X / 2) / GROUND_X;
 
-      if(path.color[coordinate] == 1){
+      if(path.color[z_coord][x_coord] == 1){
         map.loop = true;
+        printf("LOOOP\n");
       } else { map.loop = false; }
       cnt = 0;
     } else {cnt++;}
