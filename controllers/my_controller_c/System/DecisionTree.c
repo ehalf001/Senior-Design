@@ -69,7 +69,7 @@ void Lidar_Wall_Detection(struct Lidar lidar, int *wall)
 
 struct Walking Pledge_Algorithm(struct Lidar lidar, double time) 
 {
-  struct Walking Pledge_Walk = Walking_Init();
+  struct Walking Pledge_Walk = Walking_Init(.1,.1,.1,0,2,2.5);
   
   int wall[4] = {0,0,0,0};
   Lidar_Wall_Detection(lidar, &wall);

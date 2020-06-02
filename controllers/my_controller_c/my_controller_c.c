@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
   struct PathDisplay path = PathDisplay_Init();
    
   //Walking Enable
-  struct Walking WalkPatt = Walking_Init();
+  struct Walking WalkPatt = Walking_Init(.1,.1,.1,0,2,2.5);
    
   //MappingSystem Enable
   struct Map map = MappingSystem_Init();
