@@ -102,9 +102,24 @@ int main(int argc, char **argv) {
           }
           else
           {
-            if(k % 7  == 0) //a1 upper bound
+            if(k % 7  < 3) //a1 - a3 upper bound
             {
               if(search[k % 7] < (.4 - STEP_SIZE))
+                search[k % 7] = search[k % 7] + STEP_SIZE;
+            }
+            else if(k % 7  < 4) //p1 upper bound
+            {
+              if(search[k % 7] == 0)
+                search[k % 7] = search[k % 7] + STEP_SIZE;
+            }
+            else if(k % 7  < 5) //p2 upper bound
+            {
+              if(search[k % 7] < (2.4 - STEP_SIZE))
+                search[k % 7] = search[k % 7] + STEP_SIZE;
+            }
+            else if(k % 7  < 4) //p3 upper bound
+            {
+              if(search[k % 7] < (2.9 - STEP_SIZE))
                 search[k % 7] = search[k % 7] + STEP_SIZE;
             }
             else
