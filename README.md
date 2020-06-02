@@ -1,4 +1,3 @@
-
 ## CS179J Senior Design
 
 # Adaptive Subterranean Robotic Hexapod Simulation
@@ -8,6 +7,13 @@ Our software simulated hexapod will attempt to reach a goal point on a virtual 3
 ### Prerequisites
 
 -   [Webots](https://cyberbotics.com/doc/guide/installation-procedure) (most recent installation)
+
+### How to Run
+- Download most recent version of Webots
+- Open Webots
+- Open worlds folder, and click on MazeWorld.wbt
+
+(Other Worlds are not fully implemented and tested.)
 
 ## Walking
 
