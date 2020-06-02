@@ -37,17 +37,21 @@ void Lidar_Wall_Detection(struct Lidar lidar, int *wall)
      if(lidar.lidar_utm30lx_values[i] < .75 && startPt == -1){
        startPt = i;
      }
-     if(lidar.lidar_utm30lx_values[i] > .75 && startPt != -1){
+     if((lidar.lidar_utm30lx_values[i] > .75 && startPt != -1) || ((i == 1079) && (startPt != -1 ))){
        endPt = i - 1;
        //mid = (endPt + startPt) / 2;
        //float ret = mid / 1080.0 * 270.0;
        
+       
        float startDgre = startPt/1080.0 * 270;
        float endDgre = endPt/1080.0 * 270;
        
+       printf("%f\n", startDgre);
+       printf("%f\n", endDgre);
+       
        if(startDgre <= 90){wall[0] = 1;}
-       if(((180 < startDgre) && (startDgre <= 270)) || ((180 < endDgre) && (endDgre <= 270))){wall[2] = 1;}
-       if( ((90 < startDgre) && (startDgre <= 180)) || ((90 < endDgre) && (endDgre <= 180)) || ((wall[0] == 1) && (wall[2]==1)) ){wall[1] = 1;}
+       if(((endDgre > 180)) || (180 < startDgre) ){wall[2] = 1;}
+       if ((startDgre < 80 && endDgre > 190)){wall[1] = 1;}
        
        mid = (wall[1]) ? (endPt + 180) / 2 : (endPt + startPt)/2;
        float ret = mid / 1080.0 * 270.0;
@@ -56,6 +60,9 @@ void Lidar_Wall_Detection(struct Lidar lidar, int *wall)
        endPt = -1;       
      }
    }
+   
+    
+   if (wall[2]) { printf("%f\n",wall[3]); } 
    // //return wall;
 } 
 
@@ -68,14 +75,32 @@ struct Walking Pledge_Algorithm(struct Lidar lidar, double time)
   Lidar_Wall_Detection(lidar, &wall);
   //int wall[5] = {0,0,0,0,0}; 
   
-  if (wall[0]) { printf("LEFT\n");}
-  if (wall[1]) { printf("WALL\n"); }
-  if (wall[2]) { printf("RIGHT\n"); } 
+  // if (wall[0]) { printf("LEFT\n");}
+  // if (wall[1]) { printf("WALL\n"); }
+  //if (wall[2]) { printf("%f\n",wall[3]); } 
   
   if ( !(wall[0] || wall[1] || wall[2]) || (wall[2] & !wall[1]))
   {
+    //allign with wall
+    if (wall[2] && (wall[3] > 222) && (wall[3] <228))//if alligned with wall
+     {
+       //walk foreward
+      Pledge_Walk = Forward(Pledge_Walk, time);
+    }
+    else if ((wall[2]) && (wall[3] < 222))
+    {
+      Pledge_Walk = TurnLEFT(Pledge_Walk, time);
+    }
+    else if ((wall[2]) && (wall[3] > 228))
+    {
+      Pledge_Walk = TurnRIGHT(Pledge_Walk, time);
+    }
+    else 
+    {
+      Pledge_Walk = Forward(Pledge_Walk, time);
+    }
     //walk foreward
-    Pledge_Walk = Forward(Pledge_Walk, time);
+
   } 
   else if (wall[1])
   {
