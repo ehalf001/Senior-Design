@@ -127,23 +127,62 @@ struct Walking DecisionTree_Pattern(struct Walking Walkstate, struct GPS *GpsSta
    double time = wb_robot_get_time();
    struct Walking newState = Walkstate;
    int key;
+   int wall[4] = {0,0,0,0};
+   //Lidar_Wall_Detection(lidar, &wall);
    bool GoalFound = Cam.goal;
-   bool NoObst = true;
-   
-
-
+   bool NoObst;
    
    if(GoalFound)
    {
-//     if(GpsState->x_destination == 100 || GpsState->z_destination == 100)
-//     {
-       
+     Lidar_Wall_Detection(lidar, &wall);
+     NoObst = !wall[1];
+     if (NoObst)
+     {
        GpsState->x_destination = GpsState->pos_x +.1 - Cam.x_relative*cos(CompState.degree*M_PI/180.0) + Cam.z_relative*sin(CompState.degree*M_PI/180.0);
        GpsState->z_destination = GpsState->pos_z - Cam.x_relative*sin(CompState.degree*M_PI/180.0) + Cam.z_relative*cos(CompState.degree*M_PI/180.0);// + .305*cos(M_PI - CompState.degree); 
-//       printf("x: %f z: %f\n", GpsState->x_destination, GpsState->z_destination);
+
        if(GpsState->distance > .5)
          newState = Forward(newState, time);
-//     }
+       else
+         printf("Goal Found\n");
+     }
+     else
+     {
+       newState = Pledge_Algorithm(LidarState, time);
+     }
+
+
+      
+  }
+  else
+  {
+     newState = Pledge_Algorithm(LidarState, time);
+  }
+  
+      
+  return newState;
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
      /*if(NoObst)
      {
          if(GpsState->quadrant == 1)
@@ -187,14 +226,9 @@ struct Walking DecisionTree_Pattern(struct Walking Walkstate, struct GPS *GpsSta
             else if(GpsState->distance > .5)
                newState = Foward(newState, time);
          }
-      }*/
+      }
       
-  }
-  else
-  {
-     newState = Pledge_Algorithm(LidarState, time);
-  }
-  key = wb_keyboard_get_key();
+      key = wb_keyboard_get_key();
   if(key == WB_KEYBOARD_UP)
   {
     newState = Forward(newState, time);
@@ -211,7 +245,4 @@ struct Walking DecisionTree_Pattern(struct Walking Walkstate, struct GPS *GpsSta
   {
     newState = TurnRIGHT(newState, time);
   }
-      
-  return newState;
-}
-  
+  */
