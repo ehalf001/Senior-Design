@@ -46,8 +46,8 @@ void Lidar_Wall_Detection(struct Lidar lidar, int *wall)
        float startDgre = startPt/1080.0 * 270;
        float endDgre = endPt/1080.0 * 270;
        
-       printf("%f\n", startDgre);
-       printf("%f\n", endDgre);
+       //printf("%f\n", startDgre);
+       //printf("%f\n", endDgre);
        
        if(startDgre <= 90){wall[0] = 1;}
        if(((endDgre > 180)) || (180 < startDgre) ){wall[2] = 1;}
@@ -62,7 +62,7 @@ void Lidar_Wall_Detection(struct Lidar lidar, int *wall)
    }
    
     
-   if (wall[2]) { printf("%f\n",wall[3]); } 
+   //if (wall[2]) { printf("%f\n",wall[3]); } 
    // //return wall;
 } 
 
@@ -132,16 +132,27 @@ struct Walking DecisionTree_Pattern(struct Walking Walkstate, struct GPS *GpsSta
    bool GoalFound = Cam.goal;
    bool NoObst;
    
+   //printf("%d\n", Cam.goal);
+   
    if(GoalFound)
    {
-     Lidar_Wall_Detection(lidar, &wall);
+     Lidar_Wall_Detection(LidarState, &wall);
      NoObst = !wall[1];
+     //NoObst = true;
      if (NoObst)
      {
        GpsState->x_destination = GpsState->pos_x +.1 - Cam.x_relative*cos(CompState.degree*M_PI/180.0) + Cam.z_relative*sin(CompState.degree*M_PI/180.0);
        GpsState->z_destination = GpsState->pos_z - Cam.x_relative*sin(CompState.degree*M_PI/180.0) + Cam.z_relative*cos(CompState.degree*M_PI/180.0);// + .305*cos(M_PI - CompState.degree); 
 
-       if(GpsState->distance > .5)
+       if (Cam.centerPixel < 30)
+       {
+         newState = TurnLEFT(newState, time);
+       }
+       else if (Cam.centerPixel > 34)
+       {
+         newState = TurnRIGHT(newState, time);
+       }
+       else if(GpsState->distance > .5)
          newState = Forward(newState, time);
        else
          printf("Goal Found\n");

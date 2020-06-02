@@ -60,17 +60,14 @@ struct Camera Camera_Loop(struct Camera CameraOld)
     {
       const WbCameraRecognitionObject *objects = wb_camera_recognition_get_objects(CameraNew.Hexabot_Camera);
       CameraNew.centerPixel = objects[0].position_on_image[0];
-      if(CameraNew.centerPixel > 30 && CameraNew.centerPixel < 34)
-      {
+     // if(CameraNew.centerPixel > 30 && CameraNew.centerPixel < 34)
+     // {
         CameraNew.goal = true;
         CameraNew.x_relative = objects[0].position[2];
         CameraNew.y_relative = objects[0].position[1];
         CameraNew.z_relative = objects[0].position[0];
-      }
-      else
-      {
-        CameraNew.goal = false;
-      }
+     // }
+      
     }
     else if(CameraNew.numObjects == 0)
     {
