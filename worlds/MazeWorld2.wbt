@@ -1,0 +1,905 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.9899926791929248 0.038251617511288145 0.13583559512213575 5.142216879887122
+  position -0.3978430979164124 5.107156652319061 3.2913397095751122
+  follow "Hexabot"
+  followType "None"
+}
+Background {
+  skyColor [
+    0.15 0.45 1
+  ]
+}
+Robot {
+  translation -0.764975 0.097335 0.957627
+  rotation 0.06277569866677664 0.9973499788183912 0.03677269921902547 1.54965
+  children [
+    Display {
+      name "Path_Display"
+    }
+    Display {
+      name "Lidar_Display"
+    }
+    HokuyoUtm30lx {
+      translation 0 0.1 0
+      rotation 0 1 0 -1.5708
+    }
+    Compass {
+      name "Hexabot_Compass"
+    }
+    Gyro {
+      name "Hexabot_Gyro"
+    }
+    GPS {
+      name "Hexabot_GPS"
+    }
+    Camera {
+      translation 0.1 -1.12008e-13 -1.49482e-07
+      rotation 8.684229999951365e-07 -0.9999999999943995 3.2321499999818985e-06 1.5707853071795865
+      children [
+        DEF CAM_SHAPE Shape {
+          appearance MattePaint {
+            baseColor 0.7 0.1 0.1
+          }
+          geometry Cylinder {
+            height 0.05
+            radius 0.0125
+          }
+        }
+      ]
+      name "Hexabot_Camera"
+      boundingObject USE CAM_SHAPE
+      physics Physics {
+      }
+      lens Lens {
+      }
+      focus Focus {
+      }
+      recognition Recognition {
+      }
+    }
+    DEF BODY_TRAN Transform {
+      children [
+        DEF BODY Shape {
+          appearance MattePaint {
+            baseColor 0.1 0.1 0.7
+          }
+          geometry Box {
+            size 0.2 0.05 0.125
+          }
+        }
+      ]
+    }
+    Hinge2Joint {
+      jointParameters HingeJointParameters {
+        position -0.18712610947550706
+      }
+      jointParameters2 JointParameters {
+        position -0.2015845891957905
+        axis 0 1 0
+      }
+      device [
+        DEF SHOULDER_2_x RotationalMotor {
+          name "Hexabot_Leg0_Motor1"
+        }
+      ]
+      device2 [
+        DEF SHOULDER_0_y RotationalMotor {
+          name "Hexabot_Leg0_Motor2"
+        }
+      ]
+      endPoint DEF SHOULDER_0 Solid {
+        translation 0.08026909194096642 -0.0030759330129957385 0.04787657710166736
+        rotation 0.9862134608462999 0.010802677702927848 -0.16512513981829097 1.8910325050654426
+        children [
+          Transform {
+            children [
+              DEF FEMUR_0 Solid {
+                translation 0 0.025981 -0.0450019
+                rotation 1 0 0 0.523599
+                children [
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position -0.34491200118746534
+                      axis 0 0 1
+                    }
+                    device [
+                      DEF ELBOW_0 RotationalMotor {
+                        name "Hexabot_Leg0_Motor3"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation -0.00021469571570527807 -0.0007033934883311576 -0.05856390241636163
+                      rotation -0.7349462277141444 -0.6606142890337345 -0.15311042908045908 2.834939277733818
+                      children [
+                        Transform {
+                          children [
+                            Solid {
+                              translation 0.0824507 0 0.0210637
+                              rotation 0 -1 0 1.8325953071795864
+                              children [
+                                Shape {
+                                  appearance MattePaint {
+                                    baseColor 0.1 0.1 0.6
+                                  }
+                                  geometry DEF TIBIA_SHAPE Box {
+                                    size 0.025 0.025 0.15
+                                  }
+                                }
+                              ]
+                              boundingObject USE TIBIA_SHAPE
+                              physics Physics {
+                              }
+                            }
+                            DEF ELBOW_SHAPE Shape {
+                              appearance MattePaint {
+                                baseColor 0 0 0
+                              }
+                              geometry Cylinder {
+                                height 0.025
+                                radius 0.0125
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      boundingObject USE ELBOW_SHAPE
+                      physics Physics {
+                      }
+                    }
+                  }
+                  DEF FEMUR_SHAPE Shape {
+                    appearance MattePaint {
+                      baseColor 0.2 0.2 1
+                    }
+                    geometry Box {
+                      size 0.025 0.025 0.1
+                    }
+                  }
+                ]
+                boundingObject USE FEMUR_SHAPE
+                physics Physics {
+                }
+              }
+              Shape {
+                appearance MattePaint {
+                  baseColor 0 0 0
+                }
+                geometry DEF SHOULDER_SHAPE Sphere {
+                  radius 0.02
+                }
+              }
+            ]
+          }
+        ]
+        name "solid(5)"
+        boundingObject USE SHOULDER_SHAPE
+        physics Physics {
+        }
+      }
+    }
+    Hinge2Joint {
+      jointParameters HingeJointParameters {
+        position 0.587234159576378
+      }
+      jointParameters2 JointParameters {
+        position -0.19834367079428794
+        axis 0 1 0
+      }
+      device [
+        DEF SHOULDER_2_x RotationalMotor {
+          name "Hexabot_Leg1_Motor1"
+        }
+      ]
+      device2 [
+        DEF SHOULDER_0_y RotationalMotor {
+          name "Hexabot_Leg1_Motor2"
+        }
+      ]
+      endPoint DEF SHOULDER_0 Solid {
+        translation -0.0009000386782635744 -0.024525797813287703 0.05457509876145297
+        rotation 0.9966551816889656 0.032630392496632986 -0.07492467082377204 1.8700571453386579
+        children [
+          Transform {
+            children [
+              DEF FEMUR_0 Solid {
+                translation 0 0.025981 -0.0450019
+                rotation 1 0 0 0.523599
+                children [
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position -0.25508340406907914
+                      axis 0 0 1
+                    }
+                    device [
+                      DEF ELBOW_0 RotationalMotor {
+                        name "Hexabot_Leg1_Motor3"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation -0.00015359945439704517 -0.0006079840852015609 -0.05861795080600472
+                      rotation -0.7052981069098976 -0.6937057546351743 -0.14603734582413608 2.821306434788727
+                      children [
+                        Transform {
+                          children [
+                            Solid {
+                              translation 0.0824507 0 0.0210637
+                              rotation 0 -1 0 1.8325953071795864
+                              children [
+                                Shape {
+                                  appearance MattePaint {
+                                    baseColor 0.1 0.1 0.6
+                                  }
+                                  geometry DEF TIBIA_SHAPE Box {
+                                    size 0.025 0.025 0.15
+                                  }
+                                }
+                              ]
+                              boundingObject USE TIBIA_SHAPE
+                              physics Physics {
+                              }
+                            }
+                            DEF ELBOW_SHAPE Shape {
+                              appearance MattePaint {
+                                baseColor 0 0 0
+                              }
+                              geometry Cylinder {
+                                height 0.025
+                                radius 0.0125
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      boundingObject USE ELBOW_SHAPE
+                      physics Physics {
+                      }
+                    }
+                  }
+                  DEF FEMUR_SHAPE Shape {
+                    appearance MattePaint {
+                      baseColor 0.2 0.2 1
+                    }
+                    geometry Box {
+                      size 0.025 0.025 0.1
+                    }
+                  }
+                ]
+                boundingObject USE FEMUR_SHAPE
+                physics Physics {
+                }
+              }
+              Shape {
+                appearance MattePaint {
+                  baseColor 0 0 0
+                }
+                geometry DEF SHOULDER_SHAPE Sphere {
+                  radius 0.02
+                }
+              }
+            ]
+          }
+        ]
+        name "solid(4)"
+        boundingObject USE SHOULDER_SHAPE
+        physics Physics {
+        }
+      }
+    }
+    Hinge2Joint {
+      jointParameters HingeJointParameters {
+        position 1.0126629551437798
+      }
+      jointParameters2 JointParameters {
+        position -0.2017079437355761
+        axis 0 1 0
+      }
+      device [
+        DEF SHOULDER_2_x RotationalMotor {
+          name "Hexabot_Leg2_Motor1"
+        }
+      ]
+      device2 [
+        DEF SHOULDER_0_y RotationalMotor {
+          name "Hexabot_Leg2_Motor2"
+        }
+      ]
+      endPoint DEF SHOULDER_0 Solid {
+        translation -0.08770059503052505 0.008144105563238222 0.05028880380819857
+        rotation 0.9947966812605537 -0.04824629372226717 -0.08973214638608228 2.0945819897160587
+        children [
+          Transform {
+            children [
+              DEF FEMUR_0 Solid {
+                translation 0 0.025981 -0.0450019
+                rotation 1 0 0 0.523599
+                children [
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position -0.34491083622990437
+                      axis 0 0 1
+                    }
+                    device [
+                      DEF ELBOW_0 RotationalMotor {
+                        name "Hexabot_Leg2_Motor3"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation -0.00021213677713190706 -0.0006674616835332664 -0.05857588456507865
+                      rotation -0.7414593237380271 -0.668713703895957 -0.055317749987665456 3.009003204611594
+                      children [
+                        Transform {
+                          children [
+                            Solid {
+                              translation 0.0824507 0 0.0210637
+                              rotation 0 -1 0 1.8325953071795864
+                              children [
+                                Shape {
+                                  appearance MattePaint {
+                                    baseColor 0.1 0.1 0.6
+                                  }
+                                  geometry DEF TIBIA_SHAPE Box {
+                                    size 0.025 0.025 0.15
+                                  }
+                                }
+                              ]
+                              boundingObject USE TIBIA_SHAPE
+                              physics Physics {
+                              }
+                            }
+                            DEF ELBOW_SHAPE Shape {
+                              appearance MattePaint {
+                                baseColor 0 0 0
+                              }
+                              geometry Cylinder {
+                                height 0.025
+                                radius 0.0125
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      boundingObject USE ELBOW_SHAPE
+                      physics Physics {
+                      }
+                    }
+                  }
+                  DEF FEMUR_SHAPE Shape {
+                    appearance MattePaint {
+                      baseColor 0.2 0.2 1
+                    }
+                    geometry Box {
+                      size 0.025 0.025 0.1
+                    }
+                  }
+                ]
+                boundingObject USE FEMUR_SHAPE
+                physics Physics {
+                }
+              }
+              Shape {
+                appearance MattePaint {
+                  baseColor 0 0 0
+                }
+                geometry DEF SHOULDER_SHAPE Sphere {
+                  radius 0.02
+                }
+              }
+            ]
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE SHOULDER_SHAPE
+        physics Physics {
+        }
+      }
+    }
+    Hinge2Joint {
+      jointParameters HingeJointParameters {
+        position -0.01261833162901466
+      }
+      jointParameters2 JointParameters {
+        position -0.27446342019497
+        axis 0 1 0
+      }
+      device [
+        DEF SHOULDER_3_x RotationalMotor {
+          name "Hexabot_Leg3_Motor1"
+        }
+      ]
+      device2 [
+        DEF SHOULDER_3_y RotationalMotor {
+          name "Hexabot_Leg3_Motor2"
+        }
+      ]
+      endPoint DEF SHOULDER_0 Solid {
+        translation -0.08567390910763123 0.0094614342409075 -0.04574890967259524
+        rotation -0.7059114142391161 -0.7082241789384608 0.010372444932328905 0.01788033616693545
+        children [
+          Transform {
+            translation 0 0 -0.01
+            children [
+              DEF FEMUR_0 Solid {
+                translation 0 0.0259808 -0.045
+                rotation 1 0 0 0.523599
+                children [
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position -0.20502452461928014
+                      axis 0 0 1
+                    }
+                    device [
+                      DEF ELBOW_3 RotationalMotor {
+                        name "Hexabot_Leg3_Motor3"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation -8.422430759729502e-06 -2.371178300106309e-05 -0.06002055998798639
+                      rotation 3.900936590362344e-05 5.5775376382302326e-05 -0.9999999976836884 1.514022917601563
+                      children [
+                        Transform {
+                          children [
+                            Solid {
+                              translation 0.0824507 0 0.0210637
+                              rotation 0 -1 0 1.8325953071795864
+                              children [
+                                Shape {
+                                  appearance MattePaint {
+                                    baseColor 0.1 0.1 0.6
+                                  }
+                                  geometry DEF TIBIA_SHAPE Box {
+                                    size 0.025 0.025 0.15
+                                  }
+                                }
+                              ]
+                              boundingObject USE TIBIA_SHAPE
+                              physics Physics {
+                              }
+                            }
+                            DEF ELBOW_SHAPE Shape {
+                              appearance MattePaint {
+                                baseColor 0 0 0
+                              }
+                              geometry Cylinder {
+                                height 0.025
+                                radius 0.0125
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      boundingObject USE ELBOW_SHAPE
+                      physics Physics {
+                      }
+                    }
+                  }
+                  DEF FEMUR_SHAPE Shape {
+                    appearance MattePaint {
+                      baseColor 0.2 0.2 1
+                    }
+                    geometry Box {
+                      size 0.025 0.025 0.1
+                    }
+                  }
+                ]
+                boundingObject USE FEMUR_SHAPE
+                physics Physics {
+                }
+              }
+              Shape {
+                appearance MattePaint {
+                  baseColor 0 0 0
+                }
+                geometry DEF SHOULDER_SHAPE Sphere {
+                  radius 0.02
+                }
+              }
+            ]
+          }
+        ]
+        name "solid(2)"
+        boundingObject USE SHOULDER_SHAPE
+        physics Physics {
+        }
+      }
+    }
+    Hinge2Joint {
+      jointParameters HingeJointParameters {
+        position -0.08738070021379857
+      }
+      jointParameters2 JointParameters {
+        position -0.1255313989146712
+        axis 0 1 0
+      }
+      device [
+        DEF SHOULDER_4_x RotationalMotor {
+          name "Hexabot_Leg4_Motor1"
+        }
+      ]
+      device2 [
+        DEF SHOULDER_4_y RotationalMotor {
+          name "Hexabot_Leg4_Motor2"
+        }
+      ]
+      endPoint DEF SHOULDER_0 Solid {
+        translation -0.013579212800265812 -0.004540023037516874 -0.051930746480515155
+        rotation -0.5706763761049751 -0.8203914327236894 0.03586601273162576 0.15291660588148553
+        children [
+          Transform {
+            translation 0 0 -0.01
+            children [
+              DEF FEMUR_0 Solid {
+                translation 0 0.0259808 -0.045
+                rotation 1 0 0 0.523599
+                children [
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position 0.005024581120652613
+                      axis 0 0 1
+                    }
+                    device [
+                      DEF ELBOW_4 RotationalMotor {
+                        name "Hexabot_Leg4_Motor3"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation -1.2463789123628436e-13 2.4805419467816698e-11 -0.05999999999999916
+                      rotation 2.067146501241007e-10 2.0775571099153042e-10 -1 1.565770726058757
+                      children [
+                        Transform {
+                          children [
+                            Solid {
+                              translation 0.0824507 0 0.0210637
+                              rotation 0 -1 0 1.8325953071795864
+                              children [
+                                Shape {
+                                  appearance MattePaint {
+                                    baseColor 0.1 0.1 0.6
+                                  }
+                                  geometry DEF TIBIA_SHAPE Box {
+                                    size 0.025 0.025 0.15
+                                  }
+                                }
+                              ]
+                              boundingObject USE TIBIA_SHAPE
+                              physics Physics {
+                              }
+                            }
+                            DEF ELBOW_SHAPE Shape {
+                              appearance MattePaint {
+                                baseColor 0 0 0
+                              }
+                              geometry Cylinder {
+                                height 0.025
+                                radius 0.0125
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      boundingObject USE ELBOW_SHAPE
+                      physics Physics {
+                      }
+                    }
+                  }
+                  DEF FEMUR_SHAPE Shape {
+                    appearance MattePaint {
+                      baseColor 0.2 0.2 1
+                    }
+                    geometry Box {
+                      size 0.025 0.025 0.1
+                    }
+                  }
+                ]
+                boundingObject USE FEMUR_SHAPE
+                physics Physics {
+                }
+              }
+              Shape {
+                appearance MattePaint {
+                  baseColor 0 0 0
+                }
+                geometry DEF SHOULDER_SHAPE Sphere {
+                  radius 0.02
+                }
+              }
+            ]
+          }
+        ]
+        name "solid(1)"
+        boundingObject USE SHOULDER_SHAPE
+        physics Physics {
+        }
+      }
+    }
+    Hinge2Joint {
+      jointParameters HingeJointParameters {
+        position 0.0873747995850008
+      }
+      jointParameters2 JointParameters {
+        position -0.27445567954326633
+        axis 0 1 0
+      }
+      device [
+        DEF SHOULDER_5_x RotationalMotor {
+          name "Hexabot_Leg5_Motor1"
+        }
+      ]
+      device2 [
+        DEF SHOULDER_5_y RotationalMotor {
+          name "Hexabot_Leg5_Motor2"
+        }
+      ]
+      endPoint DEF SHOULDER_0 Solid {
+        translation 0.09326719625252841 0.0031603029044585213 -0.03593379028088069
+        rotation 0.3015350981305385 -0.9525453452040828 -0.041640724362587526 0.2879449378210157
+        children [
+          Transform {
+            translation 0 0 -0.01
+            children [
+              DEF FEMUR_0 Solid {
+                translation 0 0.0259808 -0.045
+                rotation 1 0 0 0.523599
+                children [
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position 0.19497557523545306
+                      axis 0 0 1
+                    }
+                    device [
+                      DEF ELBOW_5 RotationalMotor {
+                        name "Hexabot_Leg5_Motor3"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 3.0769939248005503e-23 -1.5580944514541068e-22 -0.060000000000000143
+                      rotation -1.2555875843969922e-20 -5.249241738494407e-21 -0.9999999999999999 1.3758197319440562
+                      children [
+                        Transform {
+                          children [
+                            Solid {
+                              translation 0.0824507 0 0.0210637
+                              rotation 0 -1 0 1.8325953071795864
+                              children [
+                                Shape {
+                                  appearance MattePaint {
+                                    baseColor 0.1 0.1 0.6
+                                  }
+                                  geometry DEF TIBIA_SHAPE Box {
+                                    size 0.025 0.025 0.15
+                                  }
+                                }
+                              ]
+                              boundingObject USE TIBIA_SHAPE
+                              physics Physics {
+                              }
+                            }
+                            DEF ELBOW_SHAPE Shape {
+                              appearance MattePaint {
+                                baseColor 0 0 0
+                              }
+                              geometry Cylinder {
+                                height 0.025
+                                radius 0.0125
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      boundingObject USE ELBOW_SHAPE
+                      physics Physics {
+                      }
+                      recognitionColors [
+                        0 0 0
+                      ]
+                    }
+                  }
+                  DEF FEMUR_SHAPE Shape {
+                    appearance MattePaint {
+                      baseColor 0.2 0.2 1
+                    }
+                    geometry Box {
+                      size 0.025 0.025 0.1
+                    }
+                  }
+                ]
+                boundingObject USE FEMUR_SHAPE
+                physics Physics {
+                }
+              }
+              Shape {
+                appearance MattePaint {
+                  baseColor 0 0 0
+                }
+                geometry DEF SHOULDER_SHAPE Sphere {
+                  radius 0.02
+                }
+              }
+            ]
+          }
+        ]
+        boundingObject USE SHOULDER_SHAPE
+        physics Physics {
+        }
+      }
+    }
+  ]
+  name "Hexabot"
+  boundingObject USE BODY_TRAN
+  physics Physics {
+  }
+  controller "my_controller_c"
+}
+RectangleArena {
+  translation 0 -0.05 0
+  floorSize 9.5 9.5
+  wallThickness 0.1
+  wallHeight 1
+}
+Group {
+  children [
+    Wall {
+      translation 0 -0.05 -3.92
+      name "wall(1)"
+      size 5 1 0.2
+    }
+    Wall {
+      translation 2.6 -0.05 -1.52
+      rotation 0 1 0 -1.5707953071795862
+      name "wall(2)"
+      size 5 1 0.2
+    }
+    Wall {
+      translation -0.37 -0.05 -1.44
+      rotation 0 1 0 -1.5707953071795862
+      name "wall(21)"
+      size 5 1 0.2
+    }
+    Wall {
+      translation 3.26 -0.05 -3.91
+      rotation 0 1 0 1.01503e-06
+      name "wall(3)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 4.25 -0.05 -2.9
+      rotation 0 1 0 1.01503e-06
+      name "wall(4)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 3.29 -0.05 -1.47
+      rotation 0 1 0 1.01503e-06
+      name "wall(5)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -1.16 -0.05 -1.47
+      rotation 0 1 0 1.01503e-06
+      name "wall(10)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -1.97 -0.05 -0.82
+      rotation 0 1 0 -1.5707953071795862
+      name "wall(22)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -2.62 -0.05 0.0300007
+      rotation 0 1 0 1.01503e-06
+      name "wall(23)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -3.41 -0.05 -0.629998
+      rotation 0 1 0 -1.5707953071795862
+      name "wall(24)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -4.25 -0.05 -1.28
+      rotation 0 1 0 3.14159
+      name "wall(25)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 4.25 -0.05 -0.05
+      rotation 0 1 0 1.01503e-06
+      name "wall(6)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 1.95 -0.05 1.09
+      rotation 0 1 0 1.01503e-06
+      name "wall(7)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 1.95 -0.05 2.42
+      rotation 0 1 0 1.01503e-06
+      name "wall(8)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 0.45 -0.05 2.42
+      rotation 0 1 0 1.01503e-06
+      name "wall(9)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 0.9 -0.05 3.24
+      rotation 0 1 0 1.5708
+      name "wall(11)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 0.9 -0.05 4.27
+      rotation 0 1 0 1.5708
+      name "wall(12)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 1.74 -0.05 3.62
+      rotation 0 1 0 -3.1415853071795863
+      name "wall(13)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 3.2 -0.05 3.62
+      rotation 0 1 0 -3.1415853071795863
+      name "wall(14)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 4.04 -0.05 2.96
+      rotation 0 1 0 1.5708
+      name "wall(15)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation 4.04 -0.05 2.04
+      rotation 0 1 0 1.5708
+      name "wall(16)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -1.23 -0.05 2.42
+      rotation 0 1 0 1.01503e-06
+      name "wall(17)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -0.71 -0.05 2.42
+      rotation 0 1 0 1.01503e-06
+      name "wall(27)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -2.72 -0.05 2.42
+      rotation 0 1 0 1.01503e-06
+      name "wall(26)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -1.23 -0.05 3.9
+      rotation 0 1 0 1.01503e-06
+      name "wall(20)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -1.87 -0.05 3.25
+      rotation 0 1 0 -1.5707953071795862
+      name "wall(18)"
+      size 1.5 1 0.2
+    }
+    Wall {
+      translation -0.37 -0.05 3.25
+      rotation 0 1 0 -1.5707953071795862
+      name "wall(19)"
+      size 1.5 1 0.2
+    }
+  ]
+}

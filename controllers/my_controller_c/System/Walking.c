@@ -58,7 +58,7 @@ struct Walking Walking_Init(float a1, float a2, float a3, float p1, float p2, fl
    return WalkInit;
 };
 
-struct Walking Foward(struct Walking Robot, double time)
+struct Walking Forward(struct Walking Robot, double time)
 {
     struct Walking Ret = Robot;
     int i;
