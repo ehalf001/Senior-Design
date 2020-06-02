@@ -29,12 +29,12 @@ struct Walking {
    double x_destination, z_destination;
 };
 
-struct Walking Walking_Init()
+struct Walking Walking_Init(float a1, float a2, float a3, float p1, float p2, float p3)
 {
     struct Walking WalkInit;
     WalkInit.f = .5;
-    double aa[18] = {.1, .1, -.1, -.1, -.1, .1, .1, .1, -.1, .1, .1, -.1, -.1, -.1, .1, .1, .1, -.1};
-    double pp[18] = {0, 2, 2.5, 0, 2, 2.5, 0, 2, 2.5, 0, 2, 2.5, 0, 2, 2.5, 0, 2, 2.5};
+    double aa[18] = {a1, a2, -a3, -a1, -a2, a3, a1, a2, -a3, a1, a2, -a3, -a1, -a2, a3, a1, a2, -a3};
+    double pp[18] = {p1, p2, p3, p1, p2, p3, p1, p2, p3, p1, p2, p3, p1, p2, p3, p1, p2, p3};
     double dd[18] = {-.1, -.2, -.3, .5, -.2, -.3, 1.1, -.2, -.3, -.1, -.2, -.3, 0, -.2, .1, 0, -.2, .1};
     WbDeviceTag Motors[18]= {wb_robot_get_device("Hexabot_Leg0_Motor1"), wb_robot_get_device("Hexabot_Leg0_Motor2"), wb_robot_get_device("Hexabot_Leg0_Motor3"),
                              wb_robot_get_device("Hexabot_Leg1_Motor1"), wb_robot_get_device("Hexabot_Leg1_Motor2"), wb_robot_get_device("Hexabot_Leg1_Motor3"),
