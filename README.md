@@ -1,3 +1,4 @@
+
 ## CS179J Senior Design
 # Adaptive Subterranean Robotic Hexapod Simulation
 
@@ -8,7 +9,7 @@ We are using terrain mapping and recognition tactics to drive the robot while we
 * [Webots](https://cyberbotics.com/doc/guide/installation-procedure) (most recent installation)
 
 ## Walking
-The robot starts with a base walking algorithm that utilizes sinusoidal patterns to walk forwards and backwards, as well as turning clockwise and counter-clockwise. This walking is improved upon over time automatically as the robot tries different things in an attempt to traverse the map faster.
+The robot starts with a base walking algorithm that utilizes sinusoidal patterns to walk forwards and backwards, as well as turning clockwise and counter-clockwise. This type of walking is called a tripod gait. This walking is improved upon over time automatically as the robot tries different things in an attempt to traverse the map faster.
 
 Below is an example of how we get our robot to walk with the press of the UP arrow key: 
 ```c
@@ -26,8 +27,34 @@ if(key == WB_KEYBOARD_UP)
 ```
 
 ###  Adaptive Walking: Hill Climbing Search
-[For Emanuel to fill]
+To use this component of the project, you have to open the adaptive walking world and make sure that the robot is reading into the adaptive walking algorithm controller. 
 
+The robot will start with a random set of bounded variables to test its walking. It tests by taking the average velocity over a span of 10 minutes. Then it increments and decrements a combination of those variables and switches to a new combination if the next combination is slower. Once it finds the local max, it stores it and its velocity, on the hill climbing array. It repeats this process 100 times and takes the maximum of those local maximas. Step size is determined at the top of the code. Increasing the step size that it increments variables will increase the time that the simulation will run.
+```c
+      if(time == (600*tCount))
+      {
+          printf("Current velocity: %f\n", avgVel);
+          printf("Current Vars a1: %f a2: %f a3: %f\n p1: %f p2: %f p3: %f\n",
+                 search[0], search[1], search[2],
+                 search[3], search[4], search[5]);
+          tCount += 1;
+          if(avgVel > search[6])
+          {
+            search[6] = avgVel;
+            hillclimbing_Search[j][0] = search[0];
+            hillclimbing_Search[j][1] = search[1];
+            hillclimbing_Search[j][2] = search[2];
+            hillclimbing_Search[j][3] = search[3];
+            hillclimbing_Search[j][4] = search[4];
+            hillclimbing_Search[j][5] = search[5];
+            hillclimbing_Search[j][6] = search[6];
+          }
+          else
+          {
+            k += 1;
+          }
+```
+This snippet is of storage
 ## Auxiliaries 
 
 * ### GPS
