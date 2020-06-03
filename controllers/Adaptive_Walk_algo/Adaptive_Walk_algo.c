@@ -17,10 +17,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "System/DecisionTree.c"
-#include "System/MappingSystem.c"
+#include "Auxillaries/GPS.c"
+#include "System/Walking.c"
 
 #define STEP_SIZE .1
+#define RESTARTS 10
 
 int main(int argc, char **argv) {
   /* necessary to initialize webots stuff */
@@ -33,7 +34,7 @@ int main(int argc, char **argv) {
   //GPS Enable
   struct GPS Gps = GPS_Init();
   
-  float hillclimbing_Search[100][7];
+  float hillclimbing_Search[RESTARTS][7];
   hillclimbing_Search[0][0] = .1; //a1
   hillclimbing_Search[0][1] = .1; //a2
   hillclimbing_Search[0][2] = .1; //a3
@@ -55,7 +56,7 @@ int main(int argc, char **argv) {
   float search[7] = {.1,.1,.1,0,2,2.5,-1};
   while (wb_robot_step(TIME_STEP) != -1) 
    {
-      if(j == 100)
+      if(j == RESTARTS)
         break;
       double time = wb_robot_get_time();
       Gps = GPS_Loop(Gps);      
@@ -63,7 +64,7 @@ int main(int argc, char **argv) {
       totalVel += Gps.vel;
       avgVel = totalVel / i;
       //Walk Forward
-      WalkPatt = Foward(WalkPatt, time);
+      WalkPatt = Forward(WalkPatt, time);
       
       
       
@@ -90,40 +91,40 @@ int main(int argc, char **argv) {
             k += 1;
           }
           printf("k value: %d\n",k);
-          if(k == 14)
+          if(k == 12)
           {
             k = 0;
             localMax = true;
           }
           else if(k > 6)
           {
-            if(search[k % 7] > 0)
-              search[k % 7] = search[k % 7] - STEP_SIZE;
+            if(search[k % 6] > 0)
+              search[k % 6] = search[k % 6] - STEP_SIZE;
           }
           else
           {
-            if(k % 7  < 3) //a1 - a3 upper bound
+            if(k % 6  < 3) //a1 - a3 upper bound
             {
-              if(search[k % 7] < (.4 - STEP_SIZE))
-                search[k % 7] = search[k % 7] + STEP_SIZE;
+              if(search[k % 6] < (.4 - STEP_SIZE))
+                search[k % 6] = search[k % 6] + STEP_SIZE;
             }
-            else if(k % 7  < 4) //p1 upper bound
+            else if(k % 6  < 4) //p1 upper bound
             {
-              if(search[k % 7] == 0)
-                search[k % 7] = search[k % 7] + STEP_SIZE;
+              if(search[k % 6] == 0)
+                search[k % 6] = search[k % 6] + STEP_SIZE;
             }
-            else if(k % 7  < 5) //p2 upper bound
+            else if(k % 6  < 5) //p2 upper bound
             {
-              if(search[k % 7] < (2.4 - STEP_SIZE))
-                search[k % 7] = search[k % 7] + STEP_SIZE;
+              if(search[k % 6] < (2.4 - STEP_SIZE))
+                search[k % 6] = search[k % 6] + STEP_SIZE;
             }
-            else if(k % 7  < 4) //p3 upper bound
+            else if(k % 6  < 4) //p3 upper bound
             {
-              if(search[k % 7] < (2.9 - STEP_SIZE))
-                search[k % 7] = search[k % 7] + STEP_SIZE;
+              if(search[k % 6] < (2.9 - STEP_SIZE))
+                search[k % 6] = search[k % 6] + STEP_SIZE;
             }
             else
-              search[k % 7] = search[k % 7] + STEP_SIZE;
+              search[k % 6] = search[k % 6] + STEP_SIZE;
           }
           WalkPatt = Walking_Init(search[0],search[1],search[2],search[3],search[4],search[5]);
  
@@ -145,7 +146,7 @@ int main(int argc, char **argv) {
       }
    };
   float velMax = 0.0;
-  for(j = 0; j < 100; j += 1) //finds maximum of local maximas
+  for(j = 0; j < RESTARTS; j += 1) //finds maximum of local maximas
     if(velMax < hillclimbing_Search[j][6])
     {
       velMax = hillclimbing_Search[j][6];
