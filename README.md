@@ -20,7 +20,7 @@ Our software simulated hexapod will attempt to reach a goal point on a virtual 3
 The robot starts with a base walking algorithm that utilizes sinusoidal patterns to walk forwards and backwards, as well as turning clockwise and counter-clockwise. This type of walking is called a tripod gait. This walking is improved upon over time automatically as the robot tries different things in an attempt to traverse the map faster.
 
 Below is an example of how we get our robot to walk with the press of the UP arrow key:
-
+```cpp
 /* 
 > a is an array of amplitudes  (will be altered in learning approach)
 > M_PI is the value of pi
@@ -32,7 +32,7 @@ Below is an example of how we get our robot to walk with the press of the UP arr
 if(key == WB_KEYBOARD_UP)
     for (i = 0; i < 18; ++i)  // Apply a sinuosidal function for each motor.
         wb_motor_set_position(Hexabot_Motors[i], a[i] * sin(2.0 * M_PI * f * time + p[i]) + d[i]);
-
+```
 ### Adaptive Walking: Hill Climbing Search
 
 To use this component of the project, you have to open the adaptive walking world and make sure that the robot is reading into the adaptive walking algorithm controller.
